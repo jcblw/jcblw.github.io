@@ -56,8 +56,8 @@ var site =
 
 	var 
 	React = __webpack_require__( 2 ),
-	Marrow = __webpack_require__( 3 ),
-	bound = __webpack_require__( 4 ),
+	Marrow = __webpack_require__( 4 ),
+	bound = __webpack_require__( 3 ),
 	SiteView = __webpack_require__( 5);
 
 	var Site = Marrow(function Site(){
@@ -86,25 +86,6 @@ var site =
 
 /***/ },
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Marrow = __webpack_require__(6).Marrow,
-		build = __webpack_require__(7),
-		events = __webpack_require__(8),
-		task = __webpack_require__(9);
-
-		// stiching everything together
-		Marrow.prototype = Marrow.prototype.merge( 
-			Marrow.prototype,
-			events.prototype,
-			build.prototype,
-			task.prototype
-		);
-
-	module.exports = Marrow;
-
-/***/ },
-/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -191,6 +172,25 @@ var site =
 	    }
 	    eachEvent( eventMethod, eventObj, context, removeCache );
 	}
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Marrow = __webpack_require__(6).Marrow,
+		build = __webpack_require__(7),
+		events = __webpack_require__(8),
+		task = __webpack_require__(9);
+
+		// stiching everything together
+		Marrow.prototype = Marrow.prototype.merge( 
+			Marrow.prototype,
+			events.prototype,
+			build.prototype,
+			task.prototype
+		);
+
+	module.exports = Marrow;
 
 /***/ },
 /* 5 */
@@ -727,8 +727,8 @@ var site =
 
 	var 
 	React = __webpack_require__( 2 ),
-	Icon = __webpack_require__( 12 ),
-	Avatar = __webpack_require__( 13 ),
+	Icon = __webpack_require__( 13 ),
+	Avatar = __webpack_require__( 14 ),
 	site = __webpack_require__( 1 );
 
 	module.exports = React.createClass({displayName: 'exports',
@@ -766,7 +766,7 @@ var site =
 	  }
 	});
 
-	__webpack_require__( 15); // load styles
+	__webpack_require__( 17); // load styles
 
 /***/ },
 /* 11 */
@@ -779,7 +779,7 @@ var site =
 
 	var 
 	React = __webpack_require__( 2 ),
-	CardView = __webpack_require__( 14),
+	CardView = __webpack_require__( 12),
 	site = __webpack_require__( 1 );
 
 	module.exports = React.createClass({displayName: 'exports',
@@ -806,7 +806,7 @@ var site =
 	  }
 	});
 
-	__webpack_require__( 17); // load styles
+	__webpack_require__( 15); // load styles
 
 /***/ },
 /* 12 */
@@ -819,59 +819,7 @@ var site =
 
 	var 
 	React = __webpack_require__( 2 ),
-	site = __webpack_require__( 1 );
-
-	module.exports = React.createClass({displayName: 'exports',
-	  getInitialState: function() {
-	    return { };
-	  },
-	  render: function() {
-	    return ( 
-	      React.DOM.i({className: 'icon-' + this.props.icon + ' ' + this.props.className})
-	    );
-	  }
-	});
-
-	__webpack_require__( 17); // load styles
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * @jsx React.DOM
-	 */
-
-	var 
-	React = __webpack_require__( 2 ),
-	site = __webpack_require__( 1 );
-
-	module.exports = React.createClass({displayName: 'exports',
-	  getInitialState: function() {
-	    return { };
-	  },
-	  render: function() {
-	    return ( 
-	      React.DOM.img({className:  'avatar ' + this.props.className, src:  this.props.src})
-	    );
-	  }
-	});
-
-	__webpack_require__( 17); // load styles
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * @jsx React.DOM
-	 */
-
-	var 
-	React = __webpack_require__( 2 ),
-	Icon = __webpack_require__( 12),
+	Icon = __webpack_require__( 13),
 	site = __webpack_require__( 1 );
 
 	module.exports = React.createClass({displayName: 'exports',
@@ -912,7 +860,59 @@ var site =
 	  }
 	});
 
-	__webpack_require__( 17); // load styles
+	__webpack_require__( 15); // load styles
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * @jsx React.DOM
+	 */
+
+	var 
+	React = __webpack_require__( 2 ),
+	site = __webpack_require__( 1 );
+
+	module.exports = React.createClass({displayName: 'exports',
+	  getInitialState: function() {
+	    return { };
+	  },
+	  render: function() {
+	    return ( 
+	      React.DOM.i({className: 'icon-' + this.props.icon + ' ' + this.props.className})
+	    );
+	  }
+	});
+
+	__webpack_require__( 15); // load styles
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * @jsx React.DOM
+	 */
+
+	var 
+	React = __webpack_require__( 2 ),
+	site = __webpack_require__( 1 );
+
+	module.exports = React.createClass({displayName: 'exports',
+	  getInitialState: function() {
+	    return { };
+	  },
+	  render: function() {
+	    return ( 
+	      React.DOM.img({className:  'avatar ' + this.props.className, src:  this.props.src})
+	    );
+	  }
+	});
+
+	__webpack_require__( 15); // load styles
 
 /***/ },
 /* 15 */
@@ -924,8 +924,8 @@ var site =
 	);
 	// Hot Module Replacement
 	if(false) {
-		module.hot.accept("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/nav.less", function() {
-			update(require("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/nav.less"));
+		module.hot.accept("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/card.less", function() {
+			update(require("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/card.less"));
 		});
 		module.hot.dispose(function() { update(); });
 	}
@@ -935,7 +935,7 @@ var site =
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports =
-		".nav::after {\n  content: \"\";\n  clear: both;\n  display: block;\n}\n.nav > div {\n  display: table;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  box-sizing: border-box;\n  background: #a6d8ce;\n  text-align: center;\n  float: left;\n}\n.nav > div i {\n  display: table-cell;\n  vertical-align: middle;\n}\n.nav > div img {\n  display: block;\n}\n";
+		".card {\n  margin: 8px;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  max-height: 90%;\n  overflow-y: scroll;\n}\n.card h1 {\n  margin: 0;\n}\n.card > section > section {\n  border-bottom: 1px solid #edf7f5;\n}\n.card > section ul {\n  list-style-type: none;\n  margin: 5px;\n  background: #edf7f5;\n  border-radius: 3px;\n  padding: 20px;\n}\n.card > section li {\n  line-height: 2em;\n  color: #888888;\n  border-bottom: 1px solid #a6d8ce;\n}\n.card > section li:last-of-type {\n  border-bottom: none;\n}\n";
 
 /***/ },
 /* 17 */
@@ -947,8 +947,8 @@ var site =
 	);
 	// Hot Module Replacement
 	if(false) {
-		module.hot.accept("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/card.less", function() {
-			update(require("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/card.less"));
+		module.hot.accept("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/nav.less", function() {
+			update(require("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/nav.less"));
 		});
 		module.hot.dispose(function() { update(); });
 	}
@@ -958,7 +958,7 @@ var site =
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports =
-		".card {\n  margin: 8px;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  max-height: 90%;\n  overflow-y: scroll;\n}\n.card h1 {\n  margin: 0;\n}\n.card > section > section {\n  border-bottom: 1px solid #edf7f5;\n}\n.card > section ul {\n  list-style-type: none;\n  margin: 5px;\n  background: #edf7f5;\n  border-radius: 3px;\n  padding: 20px;\n}\n.card > section li {\n  line-height: 2em;\n  color: #888888;\n  border-bottom: 1px solid #a6d8ce;\n}\n.card > section li:last-of-type {\n  border-bottom: none;\n}\n";
+		".nav::after {\n  content: \"\";\n  clear: both;\n  display: block;\n}\n.nav > div {\n  display: table;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  box-sizing: border-box;\n  background: #a6d8ce;\n  text-align: center;\n  float: left;\n}\n.nav > div i {\n  display: table-cell;\n  vertical-align: middle;\n}\n.nav > div img {\n  display: block;\n}\n";
 
 /***/ },
 /* 19 */
