@@ -1,4 +1,4 @@
-@import '../lib/colors';
+@import "../lib/colors";
 
 .card {
   margin: 8px;
@@ -7,10 +7,35 @@
   background: @white;
   max-height: 90%;
   overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
 }
 
 .card h1 {
 	margin: 0;
+}
+
+.card > section {
+	position: absolute;
+	left: 0;
+	box-sizing: border-box;
+	padding: 20px;
+	background: @white;
+	right: 0;
+	-webkit-transform: translate( 100%, 0 );
+	-moz-transform: translate( 100%, 0 );
+	-ms-transform: translate( 100%, 0 );
+	-o-transform: translate( 100%, 0 );
+	transform: translate( 100%, 0 );
+}
+
+.card > section.active {
+	-webkit-transform: translate( 0, 0 );
+	-moz-transform: translate( 0, 0 );
+	-ms-transform: translate( 0, 0 );
+	-o-transform: translate( 0, 0 );
+	transform: translate( 0, 0 );
+
 }
 
 .card > section > section {

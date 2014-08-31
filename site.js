@@ -57,22 +57,23 @@ var site =
 	var 
 	React = __webpack_require__( 2 ),
 	Marrow = __webpack_require__( 4 ),
-	bound = __webpack_require__( 3 ),
-	SiteView = __webpack_require__( 5);
+	bound = __webpack_require__( 5 ),
+	SiteView = __webpack_require__( 6),
+	dispatcher = __webpack_require__( 3 );
 
 	var Site = Marrow(function Site(){
 
-	  bound( this, {
-	    'nav': 'onNavEvent'
-	  }, this );
-
+	  dispatcher.on( 'navigation', this.onNavigation.bind( this ) );
 	},{
 	  start: function( options, container ) {
 
+	    this.options = options;
 	    this.view = React.renderComponent( SiteView( options ), container );
 	  },
-	  onNavEvent: function( e ) {
-	    console.log( arguments );
+	  onNavigation: function( eventName, page ) {
+
+	    this.options.currentPage = page;
+	    this.view.setProps( this.options );
 	  }
 	});
 
@@ -86,6 +87,36 @@ var site =
 
 /***/ },
 /* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var 
+	Marrow = __webpack_require__( 4 ),
+	bound = __webpack_require__( 5 );
+
+	var Dispatcher = Marrow( function Dispatcher() { } );
+	module.exports = new Dispatcher();
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Marrow = __webpack_require__(7).Marrow,
+		build = __webpack_require__(8),
+		events = __webpack_require__(9),
+		task = __webpack_require__(10);
+
+		// stiching everything together
+		Marrow.prototype = Marrow.prototype.merge( 
+			Marrow.prototype,
+			events.prototype,
+			build.prototype,
+			task.prototype
+		);
+
+	module.exports = Marrow;
+
+/***/ },
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -174,26 +205,7 @@ var site =
 	}
 
 /***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Marrow = __webpack_require__(6).Marrow,
-		build = __webpack_require__(7),
-		events = __webpack_require__(8),
-		task = __webpack_require__(9);
-
-		// stiching everything together
-		Marrow.prototype = Marrow.prototype.merge( 
-			Marrow.prototype,
-			events.prototype,
-			build.prototype,
-			task.prototype
-		);
-
-	module.exports = Marrow;
-
-/***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -203,8 +215,8 @@ var site =
 
 	var 
 	React = __webpack_require__( 2 ),
-	Nav = __webpack_require__( 10 ),
-	Card = __webpack_require__( 11 );
+	Nav = __webpack_require__( 11 ),
+	Card = __webpack_require__( 12 );
 
 	module.exports = React.createClass({displayName: 'exports',
 	  render: function() {
@@ -218,7 +230,7 @@ var site =
 	});
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(exports){
@@ -322,7 +334,7 @@ var site =
 	}(this));
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(Marrow){
@@ -380,7 +392,7 @@ var site =
 	}( 'function' === typeof Marrow ? Marrow : this ));
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(Marrow){
@@ -636,7 +648,7 @@ var site =
 	}( 'function' === typeof Marrow ? Marrow : this ));
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	( function ( Marrow ) {
@@ -716,7 +728,7 @@ var site =
 	 } ( 'function' === typeof Marrow ? Marrow : this ));
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -729,12 +741,15 @@ var site =
 	React = __webpack_require__( 2 ),
 	Icon = __webpack_require__( 13 ),
 	Avatar = __webpack_require__( 14 ),
-	site = __webpack_require__( 1 );
+	_ = __webpack_require__( 16 ),
+	dispatcher = __webpack_require__( 3 );
 
 	module.exports = React.createClass({displayName: 'exports',
-	  handleClick: function( e ) {
-	    console.log( arguments );
-	    //site.emit( 'nav:click', e );
+	  handleClick: function( ) {    
+	    var args = _.makeArray( arguments );
+	    args.unshift( 'navigation:click' );
+
+	    dispatcher.emit.apply( dispatcher, args );
 	  },
 	  addNavItem: function( nodeList, page, id ) {
 	    var icon;
@@ -769,7 +784,7 @@ var site =
 	__webpack_require__( 17); // load styles
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -779,7 +794,7 @@ var site =
 
 	var 
 	React = __webpack_require__( 2 ),
-	CardView = __webpack_require__( 12),
+	CardView = __webpack_require__( 15),
 	site = __webpack_require__( 1 );
 
 	module.exports = React.createClass({displayName: 'exports',
@@ -787,7 +802,7 @@ var site =
 	    return { };
 	  },
 	  addCardView: function( nodeList, page, id ) {
-	    var isCurrent = ( id === this.props.currentPage );
+	    var isCurrent = ( id === this.props.current );
 	    nodeList[ id ] = ( CardView({page: page, current: isCurrent}) );
 	  },
 	  render: function() {
@@ -806,10 +821,62 @@ var site =
 	  }
 	});
 
-	__webpack_require__( 15); // load styles
+	__webpack_require__( 19); // load styles
 
 /***/ },
-/* 12 */
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * @jsx React.DOM
+	 */
+
+	var 
+	React = __webpack_require__( 2 ),
+	site = __webpack_require__( 1 );
+
+	module.exports = React.createClass({displayName: 'exports',
+	  getInitialState: function() {
+	    return { };
+	  },
+	  render: function() {
+	    return ( 
+	      React.DOM.i({className: 'icon-' + this.props.icon + ' ' + this.props.className})
+	    );
+	  }
+	});
+
+	__webpack_require__( 19); // load styles
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * @jsx React.DOM
+	 */
+
+	var 
+	React = __webpack_require__( 2 ),
+	site = __webpack_require__( 1 );
+
+	module.exports = React.createClass({displayName: 'exports',
+	  getInitialState: function() {
+	    return { };
+	  },
+	  render: function() {
+	    return ( 
+	      React.DOM.img({className:  'avatar ' + this.props.className, src:  this.props.src})
+	    );
+	  }
+	});
+
+	__webpack_require__( 19); // load styles
+
+/***/ },
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -852,7 +919,7 @@ var site =
 	    page.contents.forEach( this.addContentNode.bind( this, nodeList ) );
 
 	    return ( 
-	      React.DOM.section({className: "card-content"}, 
+	      React.DOM.section({className:  "card-content" + ( this.props.current ? " active" : "") }, 
 	        React.DOM.h3(null, page.title), 
 	        nodeList 
 	      )
@@ -860,89 +927,24 @@ var site =
 	  }
 	});
 
-	__webpack_require__( 15); // load styles
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * @jsx React.DOM
-	 */
-
-	var 
-	React = __webpack_require__( 2 ),
-	site = __webpack_require__( 1 );
-
-	module.exports = React.createClass({displayName: 'exports',
-	  getInitialState: function() {
-	    return { };
-	  },
-	  render: function() {
-	    return ( 
-	      React.DOM.i({className: 'icon-' + this.props.icon + ' ' + this.props.className})
-	    );
-	  }
-	});
-
-	__webpack_require__( 15); // load styles
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * @jsx React.DOM
-	 */
-
-	var 
-	React = __webpack_require__( 2 ),
-	site = __webpack_require__( 1 );
-
-	module.exports = React.createClass({displayName: 'exports',
-	  getInitialState: function() {
-	    return { };
-	  },
-	  render: function() {
-	    return ( 
-	      React.DOM.img({className:  'avatar ' + this.props.className, src:  this.props.src})
-	    );
-	  }
-	});
-
-	__webpack_require__( 15); // load styles
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	var update = __webpack_require__(19)(
-		__webpack_require__(16)
-	);
-	// Hot Module Replacement
-	if(false) {
-		module.hot.accept("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/card.less", function() {
-			update(require("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/card.less"));
-		});
-		module.hot.dispose(function() { update(); });
-	}
+	__webpack_require__( 19); // load styles
 
 /***/ },
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports =
-		".card {\n  margin: 8px;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  max-height: 90%;\n  overflow-y: scroll;\n}\n.card h1 {\n  margin: 0;\n}\n.card > section > section {\n  border-bottom: 1px solid #edf7f5;\n}\n.card > section ul {\n  list-style-type: none;\n  margin: 5px;\n  background: #edf7f5;\n  border-radius: 3px;\n  padding: 20px;\n}\n.card > section li {\n  line-height: 2em;\n  color: #888888;\n  border-bottom: 1px solid #a6d8ce;\n}\n.card > section li:last-of-type {\n  border-bottom: none;\n}\n";
+	module.exports = {
+	  makeArray: function( arrayLike ) {
+	    return Array.prototype.slice.call( arrayLike, 0 );
+	  }
+	};
 
 /***/ },
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
-	var update = __webpack_require__(19)(
+	var update = __webpack_require__(21)(
 		__webpack_require__(18)
 	);
 	// Hot Module Replacement
@@ -962,6 +964,29 @@ var site =
 
 /***/ },
 /* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	var update = __webpack_require__(21)(
+		__webpack_require__(20)
+	);
+	// Hot Module Replacement
+	if(false) {
+		module.hot.accept("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/card.less", function() {
+			update(require("!!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/css-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/node_modules/less-loader/index.js!/home/jacob/Projects/Apps/jcblw.github.io/_less/components/card.less"));
+		});
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports =
+		".card {\n  margin: 8px;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  max-height: 90%;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  position: relative;\n}\n.card h1 {\n  margin: 0;\n}\n.card > section {\n  position: absolute;\n  left: 0;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  right: 0;\n  -webkit-transform: translate(100%, 0);\n  -moz-transform: translate(100%, 0);\n  -ms-transform: translate(100%, 0);\n  -o-transform: translate(100%, 0);\n  transform: translate(100%, 0);\n}\n.card > section.active {\n  -webkit-transform: translate(0, 0);\n  -moz-transform: translate(0, 0);\n  -ms-transform: translate(0, 0);\n  -o-transform: translate(0, 0);\n  transform: translate(0, 0);\n}\n.card > section > section {\n  border-bottom: 1px solid #edf7f5;\n}\n.card > section ul {\n  list-style-type: none;\n  margin: 5px;\n  background: #edf7f5;\n  border-radius: 3px;\n  padding: 20px;\n}\n.card > section li {\n  line-height: 2em;\n  color: #888888;\n  border-bottom: 1px solid #a6d8ce;\n}\n.card > section li:last-of-type {\n  border-bottom: none;\n}\n";
+
+/***/ },
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

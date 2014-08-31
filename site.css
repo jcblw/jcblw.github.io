@@ -537,6 +537,13 @@ a {
   z-index: 30;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1), 0 1px 5px rgba(0, 0, 0, 0.2), 0 0px 20px rgba(0, 0, 0, 0.05);
 }
+.transform ( $trans ) {
+  -webkit-transform: $trans;
+  -moz-transform: $trans;
+  -ms-transform: $trans;
+  -o-transform: $trans;
+  transform: $trans;
+}
 html,
 body,
 #site {
@@ -563,7 +570,6 @@ body,
   margin: 0 auto;
   max-height: 100%;
   box-sizing: border-box;
-  padding: 1em 0;
 }
 .content > nav {
   height: 80px;
@@ -576,6 +582,7 @@ body,
   .content {
     -webkit-flex-direction: row;
     flex-direction: row;
+    padding: 1em 0;
   }
   .content > nav {
     flex: 0 0 80px;

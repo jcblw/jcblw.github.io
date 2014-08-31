@@ -13,7 +13,7 @@ module.exports = React.createClass({
     return { };
   },
   addCardView: function( nodeList, page, id ) {
-    var isCurrent = ( id === this.props.currentPage );
+    var isCurrent = ( id === this.props.current );
     nodeList[ id ] = ( <CardView page={page} current={isCurrent}></CardView> );
   },
   render: function() {

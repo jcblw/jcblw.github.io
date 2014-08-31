@@ -38,7 +38,7 @@ module.exports = React.createClass({
     page.contents.forEach( this.addContentNode.bind( this, nodeList ) );
 
     return ( 
-      <section className="card-content">
+      <section className={ "card-content" + ( this.props.current ? " active" : "" ) }>
         <h3>{page.title}</h3>
         { nodeList }
       </section>

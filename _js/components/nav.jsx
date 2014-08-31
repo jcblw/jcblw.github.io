@@ -8,12 +8,15 @@ var
 React = require( 'react' ),
 Icon = require( './icon' ),
 Avatar = require( './avatar' ),
-site = require( '../site' );
+_ = require( '../libs/utilities' ),
+dispatcher = require( '../dispatcher' );
 
 module.exports = React.createClass({
-  handleClick: function( e ) {
-    console.log( arguments );
-    //site.emit( 'nav:click', e );
+  handleClick: function( ) {    
+    var args = _.makeArray( arguments );
+    args.unshift( 'navigation:click' );
+
+    dispatcher.emit.apply( dispatcher, args );
   },
   addNavItem: function( nodeList, page, id ) {
     var icon;
