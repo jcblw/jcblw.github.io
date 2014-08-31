@@ -5,29 +5,28 @@
 
 var 
 React = require( 'react' ),
+CardView = require( './card-view'),
 site = require( '../site' );
 
 module.exports = React.createClass({
   getInitialState: function() {
     return { };
   },
+  addCardView: function( nodeList, page, id ) {
+    var isCurrent = ( id === this.props.currentPage );
+    nodeList[ id ] = ( <CardView page={page} current={isCurrent}></CardView> );
+  },
   render: function() {
+    var nodeList = {};
+
+    for ( var page in this.props.pages ) {
+      this.addCardView( nodeList, this.props.pages[ page ], page );
+    }
+
     return ( 
-      <article>
-        <div className="card card-main round-borders level-4">
-          <section className="card-content">
-            <h1 className="medium-text">Expanding the nature of the web.</h1>
-            <h3>About Me</h3>
-            <section>
-              <h4><i className="icon-power"></i>Just a snippet</h4>
-              <p>I make things. I am developer based out of the Inland Empire. The web is my passion and I continue to push the bar with web technologies. I am currently the co-organizer of riverside.js. Proud to be a linux user!</p>
-            </section>
-            <section>
-              <h4><i className="icon-power"></i>Just a snippet</h4>
-              <p>I make things. I am developer based out of the Inland Empire. The web is my passion and I continue to push the bar with web technologies. I am currently the co-organizer of riverside.js. Proud to be a linux user!</p>
-            </section>
-          </section>
-        </div>
+      <article className="card card-main round-borders level-4">
+        <h1 className="medium-text">Expanding the nature of the web.</h1>
+        {nodeList}
       </article>
     );
   }

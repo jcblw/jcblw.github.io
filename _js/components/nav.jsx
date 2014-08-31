@@ -12,26 +12,34 @@ site = require( '../site' );
 
 module.exports = React.createClass({
   handleClick: function( e ) {
-    site.emit( 'nav:click', e );
+    console.log( arguments );
+    //site.emit( 'nav:click', e );
   },
-  getInitialState: function() {
-    return { };
+  addNavItem: function( nodeList, page, id ) {
+    var icon;
+    if ( page.image ) {
+      icon = ( <Avatar src={page.image} className="circle"></Avatar> );
+    }
+    else {
+      icon = ( <Icon icon={page.icon}></Icon> );
+    }
+    nodeList[ id ] = (
+        <div className="nav-item circle avatar avatar-small level-3" onClick={this.handleClick.bind( this, id )}>
+          { icon }
+        </div>
+    );
   },
   render: function() {
+
+    var nodeList = {};
+
+    for ( var page in this.props.pages ) {
+      this.addNavItem( nodeList, this.props.pages[ page ], page );
+    }
+
     return ( 
       <nav className="nav">
-        <div className="nav-item circle avatar avatar-small level-3" onClick={this.handleClick}>
-          <Avatar src="https://pbs.twimg.com/profile_images/505874091409014784/2oqUWNv4.jpeg" className="circle"></Avatar>
-        </div>
-        <div className="nav-item circle level-3">
-          <Icon icon="lab"></Icon>
-        </div>
-        <div className="nav-item circle level-3">
-          <Icon icon="megaphone"></Icon>
-        </div>
-        <div className="nav-item circle level-3">
-          <Icon icon="at" className=""></Icon>
-        </div>
+        { nodeList }
       </nav>
     );
   }

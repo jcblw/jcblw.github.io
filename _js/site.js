@@ -6,7 +6,6 @@ SiteView = require( './components/site');
 
 var Site = Marrow(function Site(){
 
-  this.view = SiteView( {} );
   bound( this, {
     'nav': 'onNavEvent'
   }, this );
@@ -14,10 +13,9 @@ var Site = Marrow(function Site(){
 },{
   start: function( options, container ) {
 
-    React.renderComponent( this.view, container );
+    this.view = React.renderComponent( SiteView( options ), container );
   },
   onNavEvent: function( e ) {
-
     console.log( arguments );
   }
 });

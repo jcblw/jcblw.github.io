@@ -6,6 +6,7 @@
   padding: 20px;
   background: @white;
   max-height: 90%;
+  overflow-y: scroll;
 }
 
 .card h1 {
@@ -16,6 +17,20 @@
 	border-bottom: 1px solid @light;
 }
 
-.card > section > section li {
-	border-bottom: 1px solid @medium;
+.card > section ul {
+	list-style-type: none;
+	margin: 5px;
+	background: @light;
+	border-radius: 3px;
+	padding: 20px;
+}
+
+.card > section li {
+	line-height: 2em;
+	color: @medium;
+	border-bottom: 1px solid @medium-accent;
+}
+
+.card > section li:last-of-type {
+	border-bottom: none;
 }

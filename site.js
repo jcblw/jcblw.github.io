@@ -62,7 +62,6 @@ var site =
 
 	var Site = Marrow(function Site(){
 
-	  this.view = SiteView( {} );
 	  bound( this, {
 	    'nav': 'onNavEvent'
 	  }, this );
@@ -70,10 +69,9 @@ var site =
 	},{
 	  start: function( options, container ) {
 
-	    React.renderComponent( this.view, container );
+	    this.view = React.renderComponent( SiteView( options ), container );
 	  },
 	  onNavEvent: function( e ) {
-
 	    console.log( arguments );
 	  }
 	});
@@ -212,8 +210,8 @@ var site =
 	  render: function() {
 	    return ( 
 	      React.DOM.div({className: "content"}, 
-	        Nav(null), 
-	        Card(null)
+	        Nav({pages: this.props.pages, current: this.props.currentPage}), 
+	        Card({pages: this.props.pages, current: this.props.currentPage})
 	      )
 	    );
 	  }
@@ -735,32 +733,40 @@ var site =
 
 	module.exports = React.createClass({displayName: 'exports',
 	  handleClick: function( e ) {
-	    site.emit( 'nav:click', e );
+	    console.log( arguments );
+	    //site.emit( 'nav:click', e );
 	  },
-	  getInitialState: function() {
-	    return { };
+	  addNavItem: function( nodeList, page, id ) {
+	    var icon;
+	    if ( page.image ) {
+	      icon = ( Avatar({src: page.image, className: "circle"}) );
+	    }
+	    else {
+	      icon = ( Icon({icon: page.icon}) );
+	    }
+	    nodeList[ id ] = (
+	        React.DOM.div({className: "nav-item circle avatar avatar-small level-3", onClick: this.handleClick.bind( this, id)}, 
+	          icon 
+	        )
+	    );
 	  },
 	  render: function() {
+
+	    var nodeList = {};
+
+	    for ( var page in this.props.pages ) {
+	      this.addNavItem( nodeList, this.props.pages[ page ], page );
+	    }
+
 	    return ( 
 	      React.DOM.nav({className: "nav"}, 
-	        React.DOM.div({className: "nav-item circle avatar avatar-small level-3", onClick: this.handleClick}, 
-	          Avatar({src: "https://pbs.twimg.com/profile_images/505874091409014784/2oqUWNv4.jpeg", className: "circle"})
-	        ), 
-	        React.DOM.div({className: "nav-item circle level-3"}, 
-	          Icon({icon: "lab"})
-	        ), 
-	        React.DOM.div({className: "nav-item circle level-3"}, 
-	          Icon({icon: "megaphone"})
-	        ), 
-	        React.DOM.div({className: "nav-item circle level-3"}, 
-	          Icon({icon: "at", className: ""})
-	        )
+	        nodeList 
 	      )
 	    );
 	  }
 	});
 
-	__webpack_require__( 14); // load styles
+	__webpack_require__( 15); // load styles
 
 /***/ },
 /* 11 */
@@ -773,35 +779,34 @@ var site =
 
 	var 
 	React = __webpack_require__( 2 ),
+	CardView = __webpack_require__( 14),
 	site = __webpack_require__( 1 );
 
 	module.exports = React.createClass({displayName: 'exports',
 	  getInitialState: function() {
 	    return { };
 	  },
+	  addCardView: function( nodeList, page, id ) {
+	    var isCurrent = ( id === this.props.currentPage );
+	    nodeList[ id ] = ( CardView({page: page, current: isCurrent}) );
+	  },
 	  render: function() {
+	    var nodeList = {};
+
+	    for ( var page in this.props.pages ) {
+	      this.addCardView( nodeList, this.props.pages[ page ], page );
+	    }
+
 	    return ( 
-	      React.DOM.article(null, 
-	        React.DOM.div({className: "card card-main round-borders level-4"}, 
-	          React.DOM.section({className: "card-content"}, 
-	            React.DOM.h1({className: "medium-text"}, "Expanding the nature of the web."), 
-	            React.DOM.h3(null, "About Me"), 
-	            React.DOM.section(null, 
-	              React.DOM.h4(null, React.DOM.i({className: "icon-power"}), "Just a snippet"), 
-	              React.DOM.p(null, "I make things. I am developer based out of the Inland Empire. The web is my passion and I continue to push the bar with web technologies. I am currently the co-organizer of riverside.js. Proud to be a linux user!")
-	            ), 
-	            React.DOM.section(null, 
-	              React.DOM.h4(null, React.DOM.i({className: "icon-power"}), "Just a snippet"), 
-	              React.DOM.p(null, "I make things. I am developer based out of the Inland Empire. The web is my passion and I continue to push the bar with web technologies. I am currently the co-organizer of riverside.js. Proud to be a linux user!")
-	            )
-	          )
-	        )
+	      React.DOM.article({className: "card card-main round-borders level-4"}, 
+	        React.DOM.h1({className: "medium-text"}, "Expanding the nature of the web."), 
+	        nodeList
 	      )
 	    );
 	  }
 	});
 
-	__webpack_require__( 16); // load styles
+	__webpack_require__( 17); // load styles
 
 /***/ },
 /* 12 */
@@ -827,7 +832,7 @@ var site =
 	  }
 	});
 
-	__webpack_require__( 16); // load styles
+	__webpack_require__( 17); // load styles
 
 /***/ },
 /* 13 */
@@ -853,15 +858,69 @@ var site =
 	  }
 	});
 
-	__webpack_require__( 16); // load styles
+	__webpack_require__( 17); // load styles
 
 /***/ },
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
+	
+	/**
+	 * @jsx React.DOM
+	 */
+
+	var 
+	React = __webpack_require__( 2 ),
+	Icon = __webpack_require__( 12),
+	site = __webpack_require__( 1 );
+
+	module.exports = React.createClass({displayName: 'exports',
+	  getInitialState: function() {
+	    return { };
+	  },
+	  addContentNode: function( nodeList, content ) {
+	    var description = {};
+
+	    if ( content.desc ) {
+	      description.content = ( React.DOM.div({dangerouslySetInnerHTML: {__html: content.desc}}) );
+	    }
+
+	    nodeList[ content.title ] = (
+	      React.DOM.section(null, 
+	        React.DOM.h4(null, 
+	          React.DOM.a({href: content.link}, 
+	            Icon({icon: content.icon}), " ", content.title
+	          )
+	        ), 
+	        description 
+	      )
+	    );
+	  },
+	  render: function() {
+	    var 
+	    page = this.props.page,
+	    nodeList = {};
+
+	    page.contents.forEach( this.addContentNode.bind( this, nodeList ) );
+
+	    return ( 
+	      React.DOM.section({className: "card-content"}, 
+	        React.DOM.h3(null, page.title), 
+	        nodeList 
+	      )
+	    );
+	  }
+	});
+
+	__webpack_require__( 17); // load styles
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
-	var update = __webpack_require__(18)(
-		__webpack_require__(15)
+	var update = __webpack_require__(19)(
+		__webpack_require__(16)
 	);
 	// Hot Module Replacement
 	if(false) {
@@ -872,19 +931,19 @@ var site =
 	}
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports =
 		".nav::after {\n  content: \"\";\n  clear: both;\n  display: block;\n}\n.nav > div {\n  display: table;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  box-sizing: border-box;\n  background: #a6d8ce;\n  text-align: center;\n  float: left;\n}\n.nav > div i {\n  display: table-cell;\n  vertical-align: middle;\n}\n.nav > div img {\n  display: block;\n}\n";
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
-	var update = __webpack_require__(18)(
-		__webpack_require__(17)
+	var update = __webpack_require__(19)(
+		__webpack_require__(18)
 	);
 	// Hot Module Replacement
 	if(false) {
@@ -895,14 +954,14 @@ var site =
 	}
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports =
-		".card {\n  margin: 8px;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  max-height: 90%;\n}\n.card h1 {\n  margin: 0;\n}\n.card > section > section {\n  border-bottom: 1px solid #edf7f5;\n}\n";
+		".card {\n  margin: 8px;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  max-height: 90%;\n  overflow-y: scroll;\n}\n.card h1 {\n  margin: 0;\n}\n.card > section > section {\n  border-bottom: 1px solid #edf7f5;\n}\n.card > section ul {\n  list-style-type: none;\n  margin: 5px;\n  background: #edf7f5;\n  border-radius: 3px;\n  padding: 20px;\n}\n.card > section li {\n  line-height: 2em;\n  color: #888888;\n  border-bottom: 1px solid #a6d8ce;\n}\n.card > section li:last-of-type {\n  border-bottom: none;\n}\n";
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
