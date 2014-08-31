@@ -1,0 +1,28 @@
+@import '../lib/colors';
+
+
+.nav::after {
+	content: "";
+	clear: both;
+	display: block;
+}
+
+.nav > div {
+    display: table;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    box-sizing: border-box;
+    background: @medium-accent;
+    text-align: center;
+    float: left;
+}
+
+.nav > div i {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.nav > div img {
+	display: block;
+}
