@@ -941,14 +941,14 @@ var site =
 	  mapRepoData: function( repo ) {
 	    return {
 	      title: repo.name,
-	      desc: repo.description + '<br /><small>' + repo.stargazers_count + 'stars</small>',
+	      desc: repo.description + '<br /><small>' + repo.stargazers_count + ' stars</small>',
 	      icon: 'code',
 	      link: repo.html_url,
 	      stars: repo.stargazers_count
 	    };
 	  },
 	  filterRepos: function( repo ) {
-	    return ( !repo.fork && repo.stargazers_count !== 0 ) ;
+	    return ( !repo.fork && repo.stargazers_count > 1 ) ;
 	  },
 	  sortByStars: function( prev, next ) {
 	    return next.stars - prev.stars;
