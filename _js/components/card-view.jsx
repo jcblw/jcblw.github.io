@@ -15,7 +15,7 @@ module.exports = React.createClass({
   mapRepoData: function( repo ) {
     return {
       title: repo.name,
-      desc: repo.description,
+      desc: repo.description + '<br /><small>' + repo.stargazers_count + 'stars',
       icon: 'code',
       link: repo.html_url,
       stars: repo.stargazers_count
