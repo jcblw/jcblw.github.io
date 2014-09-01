@@ -508,6 +508,9 @@ a {
   color: #a6d8ce;
   text-decoration: none;
 }
+small {
+  color: #888888;
+}
 /* line height */
 .tight-lineHeight {
   line-height: 1em;
