@@ -32,7 +32,8 @@
         var 
         content = doc.getElementById( 'site' ),
         currentPage = "{{page.title}}",
-        data = {{ site.data | jsonify }},
+        data = {{ site.data | jsonify }};
+        
         data.pages.projects = {
           title: 'Projects',
           icon: 'lab',

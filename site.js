@@ -56,8 +56,8 @@ var site =
 
 	var 
 	React = __webpack_require__( 2 ),
-	Marrow = __webpack_require__( 5 ),
-	bound = __webpack_require__( 4 ),
+	Marrow = __webpack_require__( 4 ),
+	bound = __webpack_require__( 5 ),
 	SiteView = __webpack_require__( 6),
 	dispatcher = __webpack_require__( 3 );
 
@@ -92,14 +92,33 @@ var site =
 /***/ function(module, exports, __webpack_require__) {
 
 	var 
-	Marrow = __webpack_require__( 5 ),
-	bound = __webpack_require__( 4 );
+	Marrow = __webpack_require__( 4 ),
+	bound = __webpack_require__( 5 );
 
 	var Dispatcher = Marrow( function Dispatcher() { } );
 	module.exports = new Dispatcher();
 
 /***/ },
 /* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Marrow = __webpack_require__(7).Marrow,
+		build = __webpack_require__(8),
+		events = __webpack_require__(9),
+		task = __webpack_require__(10);
+
+		// stiching everything together
+		Marrow.prototype = Marrow.prototype.merge( 
+			Marrow.prototype,
+			events.prototype,
+			build.prototype,
+			task.prototype
+		);
+
+	module.exports = Marrow;
+
+/***/ },
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -186,25 +205,6 @@ var site =
 	    }
 	    eachEvent( eventMethod, eventObj, context, removeCache );
 	}
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Marrow = __webpack_require__(7).Marrow,
-		build = __webpack_require__(8),
-		events = __webpack_require__(9),
-		task = __webpack_require__(10);
-
-		// stiching everything together
-		Marrow.prototype = Marrow.prototype.merge( 
-			Marrow.prototype,
-			events.prototype,
-			build.prototype,
-			task.prototype
-		);
-
-	module.exports = Marrow;
 
 /***/ },
 /* 6 */
