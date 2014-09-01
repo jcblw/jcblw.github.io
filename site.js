@@ -56,8 +56,8 @@ var site =
 
 	var 
 	React = __webpack_require__( 2 ),
-	Marrow = __webpack_require__( 4 ),
-	bound = __webpack_require__( 5 ),
+	Marrow = __webpack_require__( 5 ),
+	bound = __webpack_require__( 4 ),
 	SiteView = __webpack_require__( 6),
 	dispatcher = __webpack_require__( 3 );
 
@@ -92,33 +92,14 @@ var site =
 /***/ function(module, exports, __webpack_require__) {
 
 	var 
-	Marrow = __webpack_require__( 4 ),
-	bound = __webpack_require__( 5 );
+	Marrow = __webpack_require__( 5 ),
+	bound = __webpack_require__( 4 );
 
 	var Dispatcher = Marrow( function Dispatcher() { } );
 	module.exports = new Dispatcher();
 
 /***/ },
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Marrow = __webpack_require__(7).Marrow,
-		build = __webpack_require__(8),
-		events = __webpack_require__(9),
-		task = __webpack_require__(10);
-
-		// stiching everything together
-		Marrow.prototype = Marrow.prototype.merge( 
-			Marrow.prototype,
-			events.prototype,
-			build.prototype,
-			task.prototype
-		);
-
-	module.exports = Marrow;
-
-/***/ },
-/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -205,6 +186,25 @@ var site =
 	    }
 	    eachEvent( eventMethod, eventObj, context, removeCache );
 	}
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Marrow = __webpack_require__(7).Marrow,
+		build = __webpack_require__(8),
+		events = __webpack_require__(9),
+		task = __webpack_require__(10);
+
+		// stiching everything together
+		Marrow.prototype = Marrow.prototype.merge( 
+			Marrow.prototype,
+			events.prototype,
+			build.prototype,
+			task.prototype
+		);
+
+	module.exports = Marrow;
 
 /***/ },
 /* 6 */
@@ -938,6 +938,21 @@ var site =
 	  getInitialState: function() {
 	    return { };
 	  },
+	  mapRepoData: function( repo ) {
+	    return {
+	      title: repo.name,
+	      desc: repo.description,
+	      icon: 'code',
+	      link: repo.html_url,
+	      stars: repo.stargazers_count
+	    };
+	  },
+	  filterNoAdmin: function( repo ) {
+	    return repo.permissions.admin;
+	  },
+	  sortByStars: function( prev, next ) {
+	    return next.stars - prev.stars;
+	  },
 	  addContentNode: function( nodeList, content ) {
 	    var description = {};
 
@@ -960,6 +975,14 @@ var site =
 	    var 
 	    page = this.props.page,
 	    nodeList = {};
+
+	    if ( page.repos ) { // special handling of github data
+	      page.contentS = page.repos.filter( this.filterNoAdmin ).map( this.mapRepoData ).sort( this.sortByStars );
+	    }
+
+	    if ( !page.contents ) { // when working locally
+	      page.contents = [];
+	    }
 
 	    page.contents.forEach( this.addContentNode.bind( this, nodeList ) );
 

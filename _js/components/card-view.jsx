@@ -12,6 +12,21 @@ module.exports = React.createClass({
   getInitialState: function() {
     return { };
   },
+  mapRepoData: function( repo ) {
+    return {
+      title: repo.name,
+      desc: repo.description,
+      icon: 'code',
+      link: repo.html_url,
+      stars: repo.stargazers_count
+    };
+  },
+  filterNoAdmin: function( repo ) {
+    return repo.permissions.admin;
+  },
+  sortByStars: function( prev, next ) {
+    return next.stars - prev.stars;
+  },
   addContentNode: function( nodeList, content ) {
     var description = {};
 
@@ -34,6 +49,14 @@ module.exports = React.createClass({
     var 
     page = this.props.page,
     nodeList = {};
+
+    if ( page.repos ) { // special handling of github data
+      page.contentS = page.repos.filter( this.filterNoAdmin ).map( this.mapRepoData ).sort( this.sortByStars );
+    }
+
+    if ( !page.contents ) { // when working locally
+      page.contents = [];
+    }
 
     page.contents.forEach( this.addContentNode.bind( this, nodeList ) );
 

@@ -33,11 +33,11 @@
         content = doc.getElementById( 'site' ),
         currentPage = "{{page.title}}",
         data = {{ site.data | jsonify }};
-        
+
         data.pages.projects = {
           title: 'Projects',
           icon: 'lab',
-          contents: {{ site.github.public_repositories | jsonify }}
+          repos: {{ site.github.public_repositories | jsonify }}
         };
 
         data.avatar = {{ site.github.owner_gravatar_url | jsonify }}; 
