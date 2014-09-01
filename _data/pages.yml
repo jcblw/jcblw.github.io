@@ -16,6 +16,7 @@ about:
     - title: "My Resume"
       icon: "file"
       link: "/resume.html"
+projects:
 groups:
   title: "Accomplishment / Publications"
   icon: "megaphone"
@@ -38,6 +39,9 @@ contact:
     - title: "Github"
       link: "https://github.com/jcblw"
       icon: "github"
+    - title: "Instagram"
+      link: "http://instagram.com/jcblw"
+      icon: "instagram"
     - title: "ping@jacoblowe.me"
       link: "mailto:ping@jacoblowe.me"
       icon: "at"
