@@ -40,7 +40,7 @@
           repos: {{ site.github.public_repositories | jsonify }}
         };
 
-        data.avatar = {{ site.github.owner_gravatar_url | jsonify }}; 
+        data.pages.about.image = {{ site.github.owner_gravatar_url | jsonify }}; 
         data.currentPage = currentPage;
         if ( 'site' in window && content ) {
           site.start( data, content );
