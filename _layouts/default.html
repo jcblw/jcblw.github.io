@@ -36,10 +36,10 @@
         data.pages.projects = {
           title: 'Projects',
           icon: 'lab',
-          contents: {{ site.github.public_repositories }}
+          contents: {{ site.github.public_repositories | jsonify }}
         };
 
-        data.avatar = {{ site.github.owner_gravatar_url }}; 
+        data.avatar = {{ site.github.owner_gravatar_url | jsonify }}; 
         data.currentPage = currentPage;
         if ( 'site' in window && content ) {
           site.start( data, content );
