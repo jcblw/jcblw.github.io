@@ -13,7 +13,7 @@ module.exports = React.createClass({
     return ( 
       <div className="content">
         <Nav pages={this.props.pages} current={this.props.currentPage}></Nav>
-        <Card pages={this.props.pages} current={this.props.currentPage}></Card>
+        <Card pages={this.props.pages} current={this.props.currentPage} index={this.props.currentIndex}></Card>
       </div>
     );
   }

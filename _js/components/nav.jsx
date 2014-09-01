@@ -12,14 +12,34 @@ _ = require( '../libs/utilities' ),
 dispatcher = require( '../dispatcher' );
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return { 
+      pressed : null
+    };
+  },
   handleClick: function( ) {    
     var args = _.makeArray( arguments );
     args.unshift( 'navigation:click' );
-
     dispatcher.emit.apply( dispatcher, args );
+    this.setState( {
+      pressed: null 
+    } );
+  },
+  handlePress: function( id ) {
+    this.setState( { 
+      pressed: id 
+    } );
   },
   addNavItem: function( nodeList, page, id ) {
-    var icon;
+    var 
+    icon,
+    pressed = ( this.state.pressed === id ) ? true : false,
+    current = ( this.props.current === id ) ? true : false,
+    meta = {
+      page: id,
+      index: page.index
+    };
+    
     if ( page.image ) {
       icon = ( <Avatar src={page.image} className="circle"></Avatar> );
     }
@@ -27,7 +47,15 @@ module.exports = React.createClass({
       icon = ( <Icon icon={page.icon}></Icon> );
     }
     nodeList[ id ] = (
-        <div className="nav-item circle avatar avatar-small level-3" onClick={this.handleClick.bind( this, id )}>
+        <div className={
+            "nav-item circle avatar avatar-small level-3 " +
+            ( pressed ? 'is-pressed' : '' ) +
+            ( current ? ' active' : '' ) 
+          }
+          onTouchStart={this.handlePress.bind( this, id )}
+          onMouseDown={this.handlePress.bind( this, id )} 
+          onTouchEnd={this.handleClick.bind( this, meta )} 
+          onMouseUp={this.handleClick.bind( this, meta )}>
           { icon }
         </div>
     );

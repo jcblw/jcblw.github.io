@@ -12,11 +12,13 @@ var Site = Marrow(function Site(){
   start: function( options, container ) {
 
     this.options = options;
+    this.options.currentIndex = 0;
     this.view = React.renderComponent( SiteView( options ), container );
   },
-  onNavigation: function( eventName, page ) {
+  onNavigation: function( eventName, current ) {
 
-    this.options.currentPage = page;
+    this.options.currentPage = current.page;
+    this.options.currentIndex = current.index;
     this.view.setProps( this.options );
   }
 });

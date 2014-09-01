@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>cat ~/{{page.title}}.html >> jcbl.ws</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width,user-scalable=no">
 
         <link href='http://fonts.googleapis.com/css?family=Neuton:400,700' rel='stylesheet' type='text/css'>
         <!-- Custom CSS -->
@@ -32,8 +32,14 @@
         var 
         content = doc.getElementById( 'site' ),
         currentPage = "{{page.title}}",
-        data = {{ site.data | jsonify }};
+        data = {{ site.data | jsonify }},
+        data.pages.projects = {
+          title: 'Projects',
+          icon: 'lab',
+          contents: {{ site.github.public_repositories }}
+        };
 
+        data.avatar = {{ site.github.owner_gravatar_url }}; 
         data.currentPage = currentPage;
         if ( 'site' in window && content ) {
           site.start( data, content );

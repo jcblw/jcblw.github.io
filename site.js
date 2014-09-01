@@ -56,8 +56,8 @@ var site =
 
 	var 
 	React = __webpack_require__( 2 ),
-	Marrow = __webpack_require__( 4 ),
-	bound = __webpack_require__( 5 ),
+	Marrow = __webpack_require__( 5 ),
+	bound = __webpack_require__( 4 ),
 	SiteView = __webpack_require__( 6),
 	dispatcher = __webpack_require__( 3 );
 
@@ -68,11 +68,13 @@ var site =
 	  start: function( options, container ) {
 
 	    this.options = options;
+	    this.options.currentIndex = 0;
 	    this.view = React.renderComponent( SiteView( options ), container );
 	  },
-	  onNavigation: function( eventName, page ) {
+	  onNavigation: function( eventName, current ) {
 
-	    this.options.currentPage = page;
+	    this.options.currentPage = current.page;
+	    this.options.currentIndex = current.index;
 	    this.view.setProps( this.options );
 	  }
 	});
@@ -90,33 +92,14 @@ var site =
 /***/ function(module, exports, __webpack_require__) {
 
 	var 
-	Marrow = __webpack_require__( 4 ),
-	bound = __webpack_require__( 5 );
+	Marrow = __webpack_require__( 5 ),
+	bound = __webpack_require__( 4 );
 
 	var Dispatcher = Marrow( function Dispatcher() { } );
 	module.exports = new Dispatcher();
 
 /***/ },
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Marrow = __webpack_require__(7).Marrow,
-		build = __webpack_require__(8),
-		events = __webpack_require__(9),
-		task = __webpack_require__(10);
-
-		// stiching everything together
-		Marrow.prototype = Marrow.prototype.merge( 
-			Marrow.prototype,
-			events.prototype,
-			build.prototype,
-			task.prototype
-		);
-
-	module.exports = Marrow;
-
-/***/ },
-/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -205,6 +188,25 @@ var site =
 	}
 
 /***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Marrow = __webpack_require__(7).Marrow,
+		build = __webpack_require__(8),
+		events = __webpack_require__(9),
+		task = __webpack_require__(10);
+
+		// stiching everything together
+		Marrow.prototype = Marrow.prototype.merge( 
+			Marrow.prototype,
+			events.prototype,
+			build.prototype,
+			task.prototype
+		);
+
+	module.exports = Marrow;
+
+/***/ },
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -223,7 +225,7 @@ var site =
 	    return ( 
 	      React.DOM.div({className: "content"}, 
 	        Nav({pages: this.props.pages, current: this.props.currentPage}), 
-	        Card({pages: this.props.pages, current: this.props.currentPage})
+	        Card({pages: this.props.pages, current: this.props.currentPage, index: this.props.currentIndex})
 	      )
 	    );
 	  }
@@ -745,14 +747,34 @@ var site =
 	dispatcher = __webpack_require__( 3 );
 
 	module.exports = React.createClass({displayName: 'exports',
+	  getInitialState: function() {
+	    return { 
+	      pressed : null
+	    };
+	  },
 	  handleClick: function( ) {    
 	    var args = _.makeArray( arguments );
 	    args.unshift( 'navigation:click' );
-
 	    dispatcher.emit.apply( dispatcher, args );
+	    this.setState( {
+	      pressed: null 
+	    } );
+	  },
+	  handlePress: function( id ) {
+	    this.setState( { 
+	      pressed: id 
+	    } );
 	  },
 	  addNavItem: function( nodeList, page, id ) {
-	    var icon;
+	    var 
+	    icon,
+	    pressed = ( this.state.pressed === id ) ? true : false,
+	    current = ( this.props.current === id ) ? true : false,
+	    meta = {
+	      page: id,
+	      index: page.index
+	    };
+	    
 	    if ( page.image ) {
 	      icon = ( Avatar({src: page.image, className: "circle"}) );
 	    }
@@ -760,7 +782,15 @@ var site =
 	      icon = ( Icon({icon: page.icon}) );
 	    }
 	    nodeList[ id ] = (
-	        React.DOM.div({className: "nav-item circle avatar avatar-small level-3", onClick: this.handleClick.bind( this, id)}, 
+	        React.DOM.div({className: 
+	            "nav-item circle avatar avatar-small level-3 " +
+	            ( pressed ? 'is-pressed' : '' ) +
+	            ( current ? ' active' : ''), 
+	          
+	          onTouchStart: this.handlePress.bind( this, id), 
+	          onMouseDown: this.handlePress.bind( this, id), 
+	          onTouchEnd: this.handleClick.bind( this, meta), 
+	          onMouseUp: this.handleClick.bind( this, meta)}, 
 	          icon 
 	        )
 	    );
@@ -801,20 +831,35 @@ var site =
 	  getInitialState: function() {
 	    return { };
 	  },
+	  getCardViewPosition: function( index, current ) {
+	    if ( index < current ) {
+	      return 'card-before';
+	    }
+	    if ( index > current ) {
+	      return 'card-after';
+	    }
+	    return 'card-active';
+	  },
 	  addCardView: function( nodeList, page, id ) {
-	    var isCurrent = ( id === this.props.current );
-	    nodeList[ id ] = ( CardView({page: page, current: isCurrent}) );
+	    var 
+	    isCurrent = ( id === this.props.current ),
+	    position = this.getCardViewPosition( page.index, this.props.index ); 
+
+	    nodeList[ id ] = ( CardView({page: page, current: isCurrent, className: position}) );
 	  },
 	  render: function() {
-	    var nodeList = {};
+	    var 
+	    nodeList = {},
+	    index = 0;
 
 	    for ( var page in this.props.pages ) {
+	      this.props.pages[ page ].index = index;
 	      this.addCardView( nodeList, this.props.pages[ page ], page );
+	      index += 1;
 	    }
 
 	    return ( 
 	      React.DOM.article({className: "card card-main round-borders level-4"}, 
-	        React.DOM.h1({className: "medium-text"}, "Expanding the nature of the web."), 
 	        nodeList
 	      )
 	    );
@@ -919,8 +964,8 @@ var site =
 	    page.contents.forEach( this.addContentNode.bind( this, nodeList ) );
 
 	    return ( 
-	      React.DOM.section({className:  "card-content" + ( this.props.current ? " active" : "") }, 
-	        React.DOM.h3(null, page.title), 
+	      React.DOM.section({className:  "card-content " + this.props.className}, 
+	        React.DOM.h2(null, page.title), 
 	        nodeList 
 	      )
 	    );
@@ -960,7 +1005,7 @@ var site =
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports =
-		".nav::after {\n  content: \"\";\n  clear: both;\n  display: block;\n}\n.nav > div {\n  display: table;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  box-sizing: border-box;\n  background: #a6d8ce;\n  text-align: center;\n  float: left;\n}\n.nav > div i {\n  display: table-cell;\n  vertical-align: middle;\n}\n.nav > div img {\n  display: block;\n}\n";
+		".nav::after {\n  content: \"\";\n  clear: both;\n  display: block;\n}\n.nav > div {\n  display: table;\n  width: 44px;\n  height: 44px;\n  margin: 8px;\n  box-sizing: border-box;\n  background: #a6d8ce;\n  text-align: center;\n  float: left;\n  -webkit-transition: all 0.08s ease-out;\n  -moz-transition: all 0.08s ease-out;\n  -ms-transition: all 0.08s ease-out;\n  -o-transition: all 0.08s ease-out;\n  transition: all 0.08s ease-out;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  -o-user-select: none;\n  user-select: none;\n}\n.nav > div.is-pressed {\n  -webkit-transform: scale(0.9);\n  -moz-transform: scale(0.9);\n  -ms-transform: scale(0.9);\n  -o-transform: scale(0.9);\n  transform: scale(0.9);\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.5), 0 0px 5px rgba(0, 0, 0, 0.1);\n}\n.nav > div.active {\n  -webkit-transform: scale(1.15);\n  -moz-transform: scale(1.15);\n  -ms-transform: scale(1.15);\n  -o-transform: scale(1.15);\n  transform: scale(1.15);\n  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1), 0 1px 5px rgba(0, 0, 0, 0.2), 0 0px 20px rgba(0, 0, 0, 0.05);\n}\n.nav > div i {\n  display: table-cell;\n  vertical-align: middle;\n}\n.nav > div img {\n  display: block;\n  max-width: 44px;\n}\n@media screen and (min-width: 600px) {\n  .nav > div {\n    width: 64px;\n    height: 64px;\n  }\n  .nav > div img {\n    max-width: 64px;\n  }\n}\n";
 
 /***/ },
 /* 19 */
@@ -983,7 +1028,7 @@ var site =
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports =
-		".card {\n  margin: 8px;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  max-height: 90%;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  position: relative;\n}\n.card h1 {\n  margin: 0;\n}\n.card > section {\n  position: absolute;\n  left: 0;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  right: 0;\n  -webkit-transform: translate(100%, 0);\n  -moz-transform: translate(100%, 0);\n  -ms-transform: translate(100%, 0);\n  -o-transform: translate(100%, 0);\n  transform: translate(100%, 0);\n}\n.card > section.active {\n  -webkit-transform: translate(0, 0);\n  -moz-transform: translate(0, 0);\n  -ms-transform: translate(0, 0);\n  -o-transform: translate(0, 0);\n  transform: translate(0, 0);\n}\n.card > section > section {\n  border-bottom: 1px solid #edf7f5;\n}\n.card > section ul {\n  list-style-type: none;\n  margin: 5px;\n  background: #edf7f5;\n  border-radius: 3px;\n  padding: 20px;\n}\n.card > section li {\n  line-height: 2em;\n  color: #888888;\n  border-bottom: 1px solid #a6d8ce;\n}\n.card > section li:last-of-type {\n  border-bottom: none;\n}\n";
+		".card {\n  margin: 8px 0 0;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  max-height: 90%;\n  overflow: hidden;\n  width: 100%;\n  position: relative;\n}\n.card > section {\n  position: absolute;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  right: 0;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  -webkit-transition: all 0.5s ease-in-out 0.08s;\n  -moz-transition: all 0.5s ease-in-out 0.08s;\n  -ms-transition: all 0.5s ease-in-out 0.08s;\n  -o-transition: all 0.5s ease-in-out 0.08s;\n  transition: all 0.5s ease-in-out 0.08s;\n}\n.card > section.card-after {\n  -webkit-transform: translate(100%, 0);\n  -moz-transform: translate(100%, 0);\n  -ms-transform: translate(100%, 0);\n  -o-transform: translate(100%, 0);\n  transform: translate(100%, 0);\n}\n.card > section.card-active {\n  -webkit-transform: translate(0, 0);\n  -moz-transform: translate(0, 0);\n  -ms-transform: translate(0, 0);\n  -o-transform: translate(0, 0);\n  transform: translate(0, 0);\n}\n.card > section.card-before {\n  -webkit-transform: translate(-100%, 0);\n  -moz-transform: translate(-100%, 0);\n  -ms-transform: translate(-100%, 0);\n  -o-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n}\n.card > section > section {\n  border-bottom: 1px solid #edf7f5;\n}\n.card > section h2 {\n  margin-top: 0;\n}\n.card > section ul {\n  list-style-type: none;\n  margin: 5px;\n  background: #edf7f5;\n  border-radius: 3px;\n  padding: 20px;\n}\n.card > section li {\n  line-height: 2em;\n  color: #888888;\n  border-bottom: 1px solid #a6d8ce;\n}\n.card > section li:last-of-type {\n  border-bottom: none;\n}\n@media screen and (min-width: 600px) {\n  .card {\n    margin: 8px;\n  }\n}\n";
 
 /***/ },
 /* 21 */

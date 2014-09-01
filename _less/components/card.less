@@ -1,27 +1,36 @@
 @import "../lib/colors";
 
 .card {
-  margin: 8px;
+  margin: 8px 0 0;
   box-sizing: border-box;
   padding: 20px;
   background: @white;
   max-height: 90%;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: hidden;
+  width: 100%;
   position: relative;
 }
 
-.card h1 {
-	margin: 0;
-}
 
 .card > section {
 	position: absolute;
 	left: 0;
+	top: 0;
+	bottom: 0;
 	box-sizing: border-box;
 	padding: 20px;
 	background: @white;
 	right: 0;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	-webkit-transition: all .5s ease-in-out .08s;
+	-moz-transition: all .5s ease-in-out .08s;
+	-ms-transition: all .5s ease-in-out .08s;
+	-o-transition: all .5s ease-in-out .08s;
+	transition: all .5s ease-in-out .08s;
+}
+
+.card > section.card-after {
 	-webkit-transform: translate( 100%, 0 );
 	-moz-transform: translate( 100%, 0 );
 	-ms-transform: translate( 100%, 0 );
@@ -29,17 +38,28 @@
 	transform: translate( 100%, 0 );
 }
 
-.card > section.active {
+.card > section.card-active {
 	-webkit-transform: translate( 0, 0 );
 	-moz-transform: translate( 0, 0 );
 	-ms-transform: translate( 0, 0 );
 	-o-transform: translate( 0, 0 );
 	transform: translate( 0, 0 );
+}
 
+.card > section.card-before {
+	-webkit-transform: translate( -100%, 0 );
+	-moz-transform: translate( -100%, 0 );
+	-ms-transform: translate( -100%, 0 );
+	-o-transform: translate( -100%, 0 );
+	transform: translate( -100%, 0 );
 }
 
 .card > section > section {
 	border-bottom: 1px solid @light;
+}
+
+.card > section h2 {
+	margin-top: 0;
 }
 
 .card > section ul {
@@ -58,4 +78,10 @@
 
 .card > section li:last-of-type {
 	border-bottom: none;
+}
+
+@media screen and ( min-width: 600px ) {
+	.card {
+		margin: 8px;
+	}
 }
