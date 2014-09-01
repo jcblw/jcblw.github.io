@@ -21,8 +21,8 @@ module.exports = React.createClass({
       stars: repo.stargazers_count
     };
   },
-  filterNoAdmin: function( repo ) {
-    return repo.permissions.admin;
+  filterRepos: function( repo ) {
+    return ( !repo.fork || repo.stargazers_count === 0 ) ;
   },
   sortByStars: function( prev, next ) {
     return next.stars - prev.stars;
@@ -51,7 +51,7 @@ module.exports = React.createClass({
     nodeList = {};
 
     if ( page.repos ) { // special handling of github data
-      page.contents = page.repos.filter( this.filterNoAdmin ).map( this.mapRepoData ).sort( this.sortByStars );
+      page.contents = page.repos.filter( this.filterRepos ).map( this.mapRepoData ).sort( this.sortByStars );
     }
 
     if ( !page.contents ) { // when working locally
