@@ -948,7 +948,7 @@ var site =
 	    };
 	  },
 	  filterRepos: function( repo ) {
-	    return ( !repo.fork || repo.stargazers_count === 0 ) ;
+	    return ( !repo.fork && repo.stargazers_count !== 0 ) ;
 	  },
 	  sortByStars: function( prev, next ) {
 	    return next.stars - prev.stars;
