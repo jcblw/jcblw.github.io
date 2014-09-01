@@ -51,7 +51,7 @@ module.exports = React.createClass({
     nodeList = {};
 
     if ( page.repos ) { // special handling of github data
-      page.contentS = page.repos.filter( this.filterNoAdmin ).map( this.mapRepoData ).sort( this.sortByStars );
+      page.contents = page.repos.filter( this.filterNoAdmin ).map( this.mapRepoData ).sort( this.sortByStars );
     }
 
     if ( !page.contents ) { // when working locally
