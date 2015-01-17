@@ -18,4 +18,3 @@ module.exports = React.createClass({
   }
 });
 
-require( '../../_less/components/card.less'); // load styles

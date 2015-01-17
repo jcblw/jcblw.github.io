@@ -6,6 +6,9 @@
 @import "lib/levels";
 @import "lib/mixins";
 
+@import "components/card";
+@import "components/nav";
+
 html,
 body,
 #site {
@@ -27,7 +30,7 @@ body,
 .content {
     /* flexbox setup */
     display: -webkit-flex;
-   -webkit-flex-direction: column;
+    -webkit-flex-direction: column;
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -44,6 +47,7 @@ body,
 
 .content > article {
     flex: 1;
+    -webkit-flex: 1;
 }
 
 @media screen and ( min-width: 600px ) {
@@ -54,6 +58,7 @@ body,
     }
 
     .content > nav {
+        -webkit-flex: 0 0 80px;
         flex: 0 0 80px;
         height: 100%;
     }

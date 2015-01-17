@@ -1,8 +1,7 @@
 var 
 React = require( 'react' ),
 Marrow = require( 'marrow' ),
-bound = require( 'bound' ),
-SiteView = require( './components/site'),
+SiteView = require( './components/site.jsx'),
 dispatcher = require( './dispatcher' );
 
 var Site = Marrow(function Site(){
