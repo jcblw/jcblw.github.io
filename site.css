@@ -599,6 +599,17 @@ small {
 .card > section > section {
   border-bottom: 1px solid #edf7f5;
 }
+.card > section .hero-image {
+  color: white;
+  padding: 30px 20px;
+  margin: 0 -20px;
+  background-size: cover;
+  background-position: center center;
+}
+.card > section .hero-image * {
+  color: white!important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
 .card > section h2 {
   margin-top: 0;
 }
@@ -702,7 +713,7 @@ body,
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   max-height: 100%;
   box-sizing: border-box;

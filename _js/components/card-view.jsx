@@ -35,7 +35,7 @@ module.exports = React.createClass({
     }
 
     nodeList[ content.title ] = (
-      <section>
+      <section data-hero={content.hero}>
         <h4>
           <a href={content.link} >
             <Icon icon={content.icon}></Icon> {content.title}

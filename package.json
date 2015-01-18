@@ -6,6 +6,7 @@
     "scripts": "browserify -r ./_js/main.js:site -o site.js -t reactify",
     "styles": "lessc _less/site.less >  site.css",
     "build": "npm run scripts && npm run styles",
+    "watch": "watchify -r ./_js/main.js:site -o site.js -t reactify -d",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,7 +25,8 @@
   "devDependencies": {
     "browserify": "^8.1.1",
     "less": "~1.7.4",
-    "reactify": "^0.17.1"
+    "reactify": "^0.17.1",
+    "watchify": "^2.2.1"
   },
   "dependencies": {
     "marrow": "~0.1.0",
