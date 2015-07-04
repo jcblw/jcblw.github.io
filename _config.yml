@@ -1,7 +1,6 @@
 safe: true
 name: jcbl.ws
 markdown: redcarpet
-highlighter: true
 permalink: none
 lsi: false
 source: ./
