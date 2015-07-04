@@ -9,54 +9,51 @@
 html,
 body,
 #site {
-    min-height: 100%;
-    height: 100%;
-    position: relative;
+  min-height: 100%;
+  height: 100%;
+  position: relative;
 
 }
 
 #site {
-    background: @light; 
+  background: @white;
 }
 
-/* 
+/*
     Main Layout
     ----------------------------
 
 */
 .content {
-    /* flexbox setup */
-    display: -webkit-flex;
-   -webkit-flex-direction: column;
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    max-height: 100%;
-    box-sizing: border-box;
+  /* flexbox setup */
+  .m-displayFlex();
+  .m-flexDirection(column);
+  min-height: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  max-height: 100%;
+  box-sizing: border-box;
 }
 
 .content > nav {
-    height: 60px;
-    width: 100%;
+  height: 60px;
+  width: 100%;
 }
 
 .content > article {
-    flex: 1;
+  .m-flex(1);
 }
 
 @media screen and ( min-width: 600px ) {
-    .content {
-        -webkit-flex-direction: row;
-        flex-direction: row;
-        padding: 1em 0;
-    }
+  .content {
+    .m-flexDirection(row);
+    padding: 1em 0;
+  }
 
-    .content > nav {
-        flex: 0 0 80px;
-        height: 100%;
-    }
+  .content > nav {
+    .m-flex(0 0 80px);
+    height: 100%;
+  }
 }
 
 img {

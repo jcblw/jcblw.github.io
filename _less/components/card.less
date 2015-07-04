@@ -1,4 +1,5 @@
 @import "../lib/colors";
+@import "../lib/mixins.less";
 
 .card {
   margin: 8px 0 0;
@@ -17,42 +18,26 @@
 	left: 0;
 	top: 0;
 	bottom: 0;
+	right: 0;
 	box-sizing: border-box;
 	padding: 20px;
 	background: @white;
-	right: 0;
 	overflow-y: scroll;
 	overflow-x: hidden;
-	-webkit-transition: all .5s ease-in-out .08s;
-	-moz-transition: all .5s ease-in-out .08s;
-	-ms-transition: all .5s ease-in-out .08s;
-	-o-transition: all .5s ease-in-out .08s;
-	transition: all .5s ease-in-out .08s;
+  .m-transition(all .5s ease-in-out .08s);
 }
 
 .card > section.card-after {
-	-webkit-transform: translate( 100%, 0 );
-	-moz-transform: translate( 100%, 0 );
-	-ms-transform: translate( 100%, 0 );
-	-o-transform: translate( 100%, 0 );
-	transform: translate( 100%, 0 );
+  .m-transform(translate(100%, 0));
 }
 
 .card > section.card-active {
 	z-index: 100;
-	-webkit-transform: translate( 0, 0 );
-	-moz-transform: translate( 0, 0 );
-	-ms-transform: translate( 0, 0 );
-	-o-transform: translate( 0, 0 );
-	transform: translate( 0, 0 );
+  .m-transform(translate(0, 0));
 }
 
 .card > section.card-before {
-	-webkit-transform: translate( -100%, 0 );
-	-moz-transform: translate( -100%, 0 );
-	-ms-transform: translate( -100%, 0 );
-	-o-transform: translate( -100%, 0 );
-	transform: translate( -100%, 0 );
+  .m-transform(translate(-100%, 0));
 }
 
 .card > section > section {

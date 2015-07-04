@@ -1,7 +1,47 @@
-.transform( $trans ) {
-	-webkit-transform: $trans;
-	-moz-transform: $trans;
-	-ms-transform: $trans;
-	-o-transform: $trans;
-	transform: $trans;
+// various mixins
+
+.m-userSelect( @select ) {
+	-webkit-user-select: @select;
+	-moz-user-select: @select;
+	-ms-user-select: @select;
+	-o-user-select: @select;
+	user-select: @select;
+}
+
+
+// css animation/transform mixins
+
+.m-transform( @trans ) {
+	-webkit-transform: @trans;
+	-moz-transform: @trans;
+	-ms-transform: @trans;
+	-o-transform: @trans;
+	transform: @trans;
+}
+
+.m-transition( @tran ) {
+	-webkit-transition: @tran;
+	-moz-transition: @tran;
+	-ms-transition: @tran;
+	-o-transition: @tran;
+	transition: @tran;
+}
+
+// flexbox mixins
+
+.m-displayFlex() {
+	display: flex;
+	display: -webkit-flex;
+}
+
+.m-flex( @val ) {
+  -webkit-flex: @val;
+  -ms-flex: @val;
+  flex: @val;
+}
+
+.m-flexDirection( @val ) {
+  -webkit-flex-direction: @val;
+  -ms-flex-direction: @val;
+  flex-direction: @val;
 }
