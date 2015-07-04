@@ -3,7 +3,7 @@
  * @jsx React.DOM
  */
 
-var 
+var
 React = require( 'react' ),
 CardView = require( './card-view'),
 site = require( '../site' );
@@ -22,14 +22,14 @@ module.exports = React.createClass({
     return 'card-active';
   },
   addCardView: function( nodeList, page, id ) {
-    var 
+    var
     isCurrent = ( id === this.props.current ),
-    position = this.getCardViewPosition( page.index, this.props.index ); 
+    position = this.getCardViewPosition( page.index, this.props.index );
 
     nodeList[ id ] = ( <CardView page={page} current={isCurrent} className={position}></CardView> );
   },
   render: function() {
-    var 
+    var
     nodeList = {},
     index = 0;
 
@@ -39,8 +39,8 @@ module.exports = React.createClass({
       index += 1;
     }
 
-    return ( 
-      <article className="card card-main round-borders level-4">
+    return (
+      <article className="card card-main round-borders">
         {nodeList}
       </article>
     );
