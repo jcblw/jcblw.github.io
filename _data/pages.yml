@@ -2,8 +2,9 @@ about:
   title: "Expanding the nature of the web."
   image: "https://pbs.twimg.com/profile_images/505874091409014784/2oqUWNv4.jpeg"
   contents:
+    - hero: "http://41.media.tumblr.com/985c80f41211d10a4242aa88a12ffd98/tumblr_mrz7x1nF101s6h1wgo1_500.jpg"
     - title: "Just a snippet"
-      desc: "I make and brake awesome things. I am developer based out of Santa Monica California. The web is my passion and I continue to push the bar with web technologies. I am currently a co-organizer of <a href='http://js.la'>JS.LA</a>. I am a huge avocate for open source software. Also sloths are awesome"
+      desc: "I make and break awesome things. I am developer based out of Santa Monica California. The web is my passion and I continue to push the bar with web technologies. I am currently a co-organizer of <a href='http://js.la'>JS.LA</a>. I am a huge avocate for open source software. Also sloths are awesome"
       icon: "address-book"
       link: "#"
     - title: "I am a"

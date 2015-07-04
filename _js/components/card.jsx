@@ -5,7 +5,7 @@
 
 var
 React = require( 'react' ),
-CardView = require( './card-view'),
+CardView = require( './card-view.jsx'),
 site = require( '../site' );
 
 module.exports = React.createClass({
@@ -46,5 +46,3 @@ module.exports = React.createClass({
     );
   }
 });
-
-require( '../../_less/components/card.less'); // load styles

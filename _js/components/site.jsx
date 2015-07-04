@@ -5,8 +5,8 @@
 
 var 
 React = require( 'react' ),
-Nav = require( './nav' ),
-Card = require( './card' );
+Nav = require( './nav.jsx' ),
+Card = require( './card.jsx' );
 
 module.exports = React.createClass({
   render: function() {

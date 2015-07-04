@@ -6,8 +6,8 @@
 
 var 
 React = require( 'react' ),
-Icon = require( './icon' ),
-Avatar = require( './avatar' ),
+Icon = require( './icon.jsx' ),
+Avatar = require( './avatar.jsx' ),
 _ = require( '../libs/utilities' ),
 dispatcher = require( '../dispatcher' );
 
@@ -75,5 +75,3 @@ module.exports = React.createClass({
     );
   }
 });
-
-require( '../../_less/components/nav.less'); // load styles

@@ -5,7 +5,7 @@
 
 var 
 React = require( 'react' ),
-Icon = require( './icon'),
+Icon = require( './icon.jsx'),
 site = require( '../site' );
 
 module.exports = React.createClass({
@@ -35,7 +35,7 @@ module.exports = React.createClass({
     }
 
     nodeList[ content.title ] = (
-      <section>
+      <section data-hero={content.hero}>
         <h4>
           <a href={content.link} >
             <Icon icon={content.icon}></Icon> {content.title}
@@ -68,5 +68,3 @@ module.exports = React.createClass({
     );
   }
 });
-
-require( '../../_less/components/card.less'); // load styles

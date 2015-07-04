@@ -6,6 +6,9 @@
 @import "lib/levels";
 @import "lib/mixins";
 
+@import "components/card";
+@import "components/nav";
+
 html,
 body,
 #site {
@@ -25,7 +28,6 @@ body,
 
 */
 .content {
-  /* flexbox setup */
   .m-displayFlex();
   .m-flexDirection(column);
   min-height: 100%;
@@ -38,6 +40,8 @@ body,
 .content > nav {
   height: 60px;
   width: 100%;
+  display: table;
+  margin: 0 auto;
 }
 
 .content > article {
@@ -48,6 +52,7 @@ body,
   .content {
     .m-flexDirection(row);
     padding: 1em 0;
+    height: 100%;
   }
 
   .content > nav {
