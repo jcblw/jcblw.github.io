@@ -2,6 +2,10 @@
 @import "../lib/mixins.less";
 @import "../lib/levels.less";
 
+.nav {
+	border-bottom: 2px solid @light;
+}
+
 .nav::after {
 	content: "";
 	clear: both;
@@ -41,4 +45,10 @@
 .nav > div img {
 	display: block;
 	max-width: 40px;
+}
+
+@media (min-width: 600px) {
+	.nav {
+		border-bottom: none;
+	}
 }
