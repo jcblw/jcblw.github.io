@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "My site hosted on github",
   "scripts": {
+    "watch": "gulp watch",
+    "start": "jekyll serve --watch",
+    "build": "gulp js && gulp less",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

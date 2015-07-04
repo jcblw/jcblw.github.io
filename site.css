@@ -530,22 +530,13 @@ small {
 }
 .level-2 {
   z-index: 10;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.5), 0 0px 5px rgba(0, 0, 0, 0.1);
 }
 .level-3 {
   z-index: 20;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.3), 0 0px 10px rgba(0, 0, 0, 0.05);
 }
 .level-4 {
   z-index: 30;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1), 0 1px 5px rgba(0, 0, 0, 0.2), 0 0px 20px rgba(0, 0, 0, 0.05);
-}
-.transform( $trans ) {
-  -webkit-transform: $trans;
-  -moz-transform: $trans;
-  -ms-transform: $trans;
-  -o-transform: $trans;
-  transform: $trans;
 }
 html,
 body,
@@ -555,18 +546,19 @@ body,
   position: relative;
 }
 #site {
-  background: #edf7f5;
+  background: #ffffff;
 }
-/* 
+/*
     Main Layout
     ----------------------------
 
 */
 .content {
   /* flexbox setup */
+  display: flex;
   display: -webkit-flex;
   -webkit-flex-direction: column;
-  display: flex;
+  -ms-flex-direction: column;
   flex-direction: column;
   min-height: 100%;
   max-width: 600px;
@@ -579,15 +571,20 @@ body,
   width: 100%;
 }
 .content > article {
+  -webkit-flex: 1;
+  -ms-flex: 1;
   flex: 1;
 }
 @media screen and (min-width: 600px) {
   .content {
     -webkit-flex-direction: row;
+    -ms-flex-direction: row;
     flex-direction: row;
     padding: 1em 0;
   }
   .content > nav {
+    -webkit-flex: 0 0 80px;
+    -ms-flex: 0 0 80px;
     flex: 0 0 80px;
     height: 100%;
   }

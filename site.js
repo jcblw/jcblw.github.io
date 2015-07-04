@@ -743,7 +743,7 @@ var site =
 	React = __webpack_require__( 2 ),
 	Icon = __webpack_require__( 13 ),
 	Avatar = __webpack_require__( 14 ),
-	_ = __webpack_require__( 16 ),
+	_ = __webpack_require__( 15 ),
 	dispatcher = __webpack_require__( 3 );
 
 	module.exports = React.createClass({displayName: 'exports',
@@ -822,9 +822,9 @@ var site =
 	 * @jsx React.DOM
 	 */
 
-	var 
+	var
 	React = __webpack_require__( 2 ),
-	CardView = __webpack_require__( 15),
+	CardView = __webpack_require__( 16),
 	site = __webpack_require__( 1 );
 
 	module.exports = React.createClass({displayName: 'exports',
@@ -841,14 +841,14 @@ var site =
 	    return 'card-active';
 	  },
 	  addCardView: function( nodeList, page, id ) {
-	    var 
+	    var
 	    isCurrent = ( id === this.props.current ),
-	    position = this.getCardViewPosition( page.index, this.props.index ); 
+	    position = this.getCardViewPosition( page.index, this.props.index );
 
 	    nodeList[ id ] = ( CardView({page: page, current: isCurrent, className: position}) );
 	  },
 	  render: function() {
-	    var 
+	    var
 	    nodeList = {},
 	    index = 0;
 
@@ -858,8 +858,8 @@ var site =
 	      index += 1;
 	    }
 
-	    return ( 
-	      React.DOM.article({className: "card card-main round-borders level-4"}, 
+	    return (
+	      React.DOM.article({className: "card card-main round-borders"}, 
 	        nodeList
 	      )
 	    );
@@ -867,6 +867,7 @@ var site =
 	});
 
 	__webpack_require__( 19); // load styles
+
 
 /***/ },
 /* 13 */
@@ -922,6 +923,16 @@ var site =
 
 /***/ },
 /* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	  makeArray: function( arrayLike ) {
+	    return Array.prototype.slice.call( arrayLike, 0 );
+	  }
+	};
+
+/***/ },
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -998,16 +1009,6 @@ var site =
 	__webpack_require__( 19); // load styles
 
 /***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-	  makeArray: function( arrayLike ) {
-	    return Array.prototype.slice.call( arrayLike, 0 );
-	  }
-	};
-
-/***/ },
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1028,7 +1029,7 @@ var site =
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports =
-		".nav::after {\n  content: \"\";\n  clear: both;\n  display: block;\n}\n.nav > div {\n  display: table;\n  width: 44px;\n  height: 44px;\n  margin: 8px;\n  box-sizing: border-box;\n  background: #a6d8ce;\n  text-align: center;\n  float: left;\n  -webkit-transition: all 0.08s ease-out;\n  -moz-transition: all 0.08s ease-out;\n  -ms-transition: all 0.08s ease-out;\n  -o-transition: all 0.08s ease-out;\n  transition: all 0.08s ease-out;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  -o-user-select: none;\n  user-select: none;\n}\n.nav > div.is-pressed {\n  -webkit-transform: scale(0.9);\n  -moz-transform: scale(0.9);\n  -ms-transform: scale(0.9);\n  -o-transform: scale(0.9);\n  transform: scale(0.9);\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.5), 0 0px 5px rgba(0, 0, 0, 0.1);\n}\n.nav > div.active {\n  -webkit-transform: scale(1.15);\n  -moz-transform: scale(1.15);\n  -ms-transform: scale(1.15);\n  -o-transform: scale(1.15);\n  transform: scale(1.15);\n  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1), 0 1px 5px rgba(0, 0, 0, 0.2), 0 0px 20px rgba(0, 0, 0, 0.05);\n}\n.nav > div i {\n  display: table-cell;\n  vertical-align: middle;\n}\n.nav > div img {\n  display: block;\n  max-width: 44px;\n}\n@media screen and (min-width: 600px) {\n  .nav > div {\n    width: 64px;\n    height: 64px;\n  }\n  .nav > div img {\n    max-width: 64px;\n  }\n}\n";
+		".level-1 {\n  z-index: 0;\n}\n.level-2 {\n  z-index: 10;\n}\n.level-3 {\n  z-index: 20;\n}\n.level-4 {\n  z-index: 30;\n  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1), 0 1px 5px rgba(0, 0, 0, 0.2), 0 0px 20px rgba(0, 0, 0, 0.05);\n}\n.nav::after {\n  content: \"\";\n  clear: both;\n  display: block;\n}\n.nav > div {\n  display: table;\n  width: 44px;\n  height: 44px;\n  margin: 8px;\n  box-sizing: border-box;\n  background: #ffffff;\n  text-align: center;\n  float: left;\n  border: 2px solid #edf7f5;\n  -webkit-transition: all 0.08s ease-out;\n  -moz-transition: all 0.08s ease-out;\n  -ms-transition: all 0.08s ease-out;\n  -o-transition: all 0.08s ease-out;\n  transition: all 0.08s ease-out;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  -o-user-select: none;\n  user-select: none;\n}\n.nav > div.is-pressed {\n  -webkit-transform: scale(1.15);\n  -moz-transform: scale(1.15);\n  -ms-transform: scale(1.15);\n  -o-transform: scale(1.15);\n  transform: scale(1.15);\n  z-index: 30;\n  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1), 0 1px 5px rgba(0, 0, 0, 0.2), 0 0px 20px rgba(0, 0, 0, 0.05);\n}\n.nav > div.active {\n  border: 2px solid #a6d8ce;\n}\n.nav > div i {\n  display: table-cell;\n  vertical-align: middle;\n}\n.nav > div img {\n  display: block;\n  max-width: 44px;\n}\n@media screen and (min-width: 600px) {\n  nav > div {\n    width: 64px;\n    height: 64px;\n  }\n  .nav > div img {\n    max-width: 64px;\n  }\n}\n";
 
 /***/ },
 /* 19 */
@@ -1051,7 +1052,7 @@ var site =
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports =
-		".card {\n  margin: 8px 0 0;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  max-height: 90%;\n  overflow: hidden;\n  width: 100%;\n  position: relative;\n}\n.card > section {\n  position: absolute;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  right: 0;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  -webkit-transition: all 0.5s ease-in-out 0.08s;\n  -moz-transition: all 0.5s ease-in-out 0.08s;\n  -ms-transition: all 0.5s ease-in-out 0.08s;\n  -o-transition: all 0.5s ease-in-out 0.08s;\n  transition: all 0.5s ease-in-out 0.08s;\n}\n.card > section.card-after {\n  -webkit-transform: translate(100%, 0);\n  -moz-transform: translate(100%, 0);\n  -ms-transform: translate(100%, 0);\n  -o-transform: translate(100%, 0);\n  transform: translate(100%, 0);\n}\n.card > section.card-active {\n  z-index: 100;\n  -webkit-transform: translate(0, 0);\n  -moz-transform: translate(0, 0);\n  -ms-transform: translate(0, 0);\n  -o-transform: translate(0, 0);\n  transform: translate(0, 0);\n}\n.card > section.card-before {\n  -webkit-transform: translate(-100%, 0);\n  -moz-transform: translate(-100%, 0);\n  -ms-transform: translate(-100%, 0);\n  -o-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n}\n.card > section > section {\n  border-bottom: 1px solid #edf7f5;\n}\n.card > section h2 {\n  margin-top: 0;\n}\n.card > section ul {\n  list-style-type: none;\n  margin: 5px;\n  background: #edf7f5;\n  border-radius: 3px;\n  padding: 20px;\n}\n.card > section li {\n  line-height: 2em;\n  color: #888888;\n  border-bottom: 1px solid #a6d8ce;\n}\n.card > section li:last-of-type {\n  border-bottom: none;\n}\n@media screen and (min-width: 600px) {\n  .card {\n    margin: 8px;\n  }\n}\n";
+		".card {\n  margin: 8px 0 0;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  max-height: 90%;\n  overflow: hidden;\n  width: 100%;\n  position: relative;\n}\n.card > section {\n  position: absolute;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  box-sizing: border-box;\n  padding: 20px;\n  background: #ffffff;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  -webkit-transition: all 0.5s ease-in-out 0.08s;\n  -moz-transition: all 0.5s ease-in-out 0.08s;\n  -ms-transition: all 0.5s ease-in-out 0.08s;\n  -o-transition: all 0.5s ease-in-out 0.08s;\n  transition: all 0.5s ease-in-out 0.08s;\n}\n.card > section.card-after {\n  -webkit-transform: translate(100%, 0);\n  -moz-transform: translate(100%, 0);\n  -ms-transform: translate(100%, 0);\n  -o-transform: translate(100%, 0);\n  transform: translate(100%, 0);\n}\n.card > section.card-active {\n  z-index: 100;\n  -webkit-transform: translate(0, 0);\n  -moz-transform: translate(0, 0);\n  -ms-transform: translate(0, 0);\n  -o-transform: translate(0, 0);\n  transform: translate(0, 0);\n}\n.card > section.card-before {\n  -webkit-transform: translate(-100%, 0);\n  -moz-transform: translate(-100%, 0);\n  -ms-transform: translate(-100%, 0);\n  -o-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n}\n.card > section > section {\n  border-bottom: 1px solid #edf7f5;\n}\n.card > section h2 {\n  margin-top: 0;\n}\n.card > section ul {\n  list-style-type: none;\n  margin: 5px;\n  background: #edf7f5;\n  border-radius: 3px;\n  padding: 20px;\n}\n.card > section li {\n  line-height: 2em;\n  color: #888888;\n  border-bottom: 1px solid #a6d8ce;\n}\n.card > section li:last-of-type {\n  border-bottom: none;\n}\n@media screen and (min-width: 600px) {\n  .card {\n    margin: 8px;\n  }\n}\n";
 
 /***/ },
 /* 21 */
