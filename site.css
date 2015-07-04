@@ -709,8 +709,6 @@ body,
 .content > nav {
   height: 60px;
   width: 100%;
-  display: table;
-  margin: 0 auto;
 }
 .content > article {
   -webkit-flex: 1;
