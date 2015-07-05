@@ -1,5 +1,7 @@
+'use strict'
+
 module.exports = {
-  makeArray: function( arrayLike ) {
-    return Array.prototype.slice.call( arrayLike, 0 );
+  makeArray(arr) {
+    return Array.prototype.slice.call(arr, 0)
   }
-};
+}

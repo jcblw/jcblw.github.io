@@ -1,5 +1,5 @@
-var 
-Marrow = require( 'marrow' );
+'use strict'
 
-var Dispatcher = Marrow( function Dispatcher() { } );
+const marrow = require( 'marrow' )
+const Dispatcher = marrow(function Dispatcher(){})
 module.exports = new Dispatcher();

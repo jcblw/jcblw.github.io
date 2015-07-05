@@ -1,39 +1,33 @@
+'use strict'
+
+const _ = require('./libs/utilities')
 
 function loadImage( url, callback ) {
-
-  var
-  image = new Image();
-
+  const image = new Image()
   function onLoaded() {
-    callback( null, this );
+    callback(null, image)
   }
-
-  image.onload = onLoaded;
-  image.onerror = callback;
-
-  image.src = url;
+  image.onload = onLoaded
+  image.onerror = callback
+  image.src = url
 }
 
-function makeArray( arr ) {
-  return Array.prototype.slice.call( arr, 0 );
-}
-
-function loadAndAppend( attr ) {
-  return function( el ) {
-    var url = el.getAttribute( attr );
-
-    loadImage( url, function( err, img ) {
-      if ( err ) return console.error( err );
-      el.style.backgroundImage = 'url(' + img.src + ')';
-      el.style.minHeight = ( img.naturalHeight / 2 ) + 'px';
-      el.classList.add( 'hero-image' );
-    } );
+function loadAndAppend(attr) {
+  return function(el) {
+    const url = el.getAttribute(attr)
+    loadImage(url, function(err, img) {
+      if (err) {
+        return console.error(err)
+      }
+      el.style.backgroundImage = `url(${img.src} )`
+      el.style.minHeight = `${img.naturalHeight / 2}px`
+      el.classList.add('hero-image')
+    })
   }
 }
 
-module.exports.loadAttribute = function ( attr ) {
-
-  var
-  heros = document.querySelectorAll( '[' + attr + ']' );
-  makeArray( heros ).forEach( loadAndAppend( attr ) );
+module.exports.loadAttribute = function (attr) {
+  const heros = document.querySelectorAll(`[${attr}]`);
+  _.makeArray(heros)
+    .forEach(loadAndAppend(attr));
 }
