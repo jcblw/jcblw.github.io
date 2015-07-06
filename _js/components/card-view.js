@@ -1,7 +1,6 @@
 'use strict'
 
 import React, {Component} from 'react/addons'
-import ReactEmoji from 'react-emoji'
 import Icon from './icon'
 
 class CardView extends Component {
@@ -14,7 +13,7 @@ class CardView extends Component {
   mapRepoData(repo) {
     return {
       title: repo.name,
-      desc: `${ReactEmoji.emojify(repo.description)}<br /><small>${repo.stargazers_count}stars</small>`,
+      desc: `${repo.description}<br /><small>${repo.stargazers_count}stars</small>`,
       icon: 'code',
       link: repo.html_url,
       stars: repo.stargazers_count
