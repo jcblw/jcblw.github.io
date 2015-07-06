@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "marrow": "~0.1.0",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-emoji": "^0.3.2"
   }
 }
