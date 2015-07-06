@@ -1,8 +1,8 @@
 'use strict'
 
-const React = require('react')
+import React, {Component} from 'react'
 
-module.exports = class Avatar extends React.Component {
+class Avatar extends Component {
   constructor() {
     super()
   }
@@ -12,3 +12,5 @@ module.exports = class Avatar extends React.Component {
     )
   }
 }
+
+export default Avatar

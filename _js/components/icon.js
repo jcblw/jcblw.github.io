@@ -1,8 +1,8 @@
 'use strict'
 
-const React = require('react')
+import React, {Component} from 'react'
 
-module.exports = class Icon extends React.Component {
+class Icon extends Component {
   constructor() {
     super()
   }
@@ -12,3 +12,5 @@ module.exports = class Icon extends React.Component {
     )
   }
 }
+
+export default Icon

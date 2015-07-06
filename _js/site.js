@@ -1,10 +1,11 @@
 'use strict'
 
-const React = require('react')
-const marrow = require('marrow')
-const SiteView = require('./components/site')
-const dispatcher = require('./dispatcher')
-const hero = require('./hero')
+import React from 'react'
+import marrow from 'marrow'
+import SiteView from './components/site'
+import dispatcher from './dispatcher'
+import {loadAttribute} from './hero'
+
 const Site = marrow(
   function Site(){
     dispatcher.on('navigation', this.onNavigation.bind(this))
@@ -15,11 +16,10 @@ const Site = marrow(
       this.options.currentIndex = 0
       this.container = container
       this.render()
-      hero.loadAttribute('data-hero')
+      loadAttribute('data-hero')
     },
 
     onNavigation: function(eventName, current) {
-      hero.loadAttribute('data-hero')
       this.options.currentPage = current.page
       this.options.currentIndex = current.index
       this.render();
@@ -36,4 +36,5 @@ const Site = marrow(
     }
   }
 )
-module.exports = new Site()
+const site = new Site()
+export default site

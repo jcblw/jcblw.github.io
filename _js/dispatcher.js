@@ -1,5 +1,6 @@
 'use strict'
 
-const marrow = require( 'marrow' )
+import {default as marrow} from 'marrow'
 const Dispatcher = marrow(function Dispatcher(){})
-module.exports = new Dispatcher();
+const dispatcher = new Dispatcher()
+export default dispatcher

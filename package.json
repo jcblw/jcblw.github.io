@@ -4,10 +4,10 @@
   "description": "My site hosted on github",
   "scripts": {
     "start": "jekyll serve --watch",
-    "scripts": "browserify -r ./_js/main.js:site -o site.js -t babelify",
+    "scripts": "browserify -r ./_js/main.js:site -o site.js -t [ babelify --modules common ]",
     "styles": "lessc _less/site.less >  site.css",
     "build": "npm run scripts && npm run styles",
-    "watch": "watchify -r ./_js/main.js:site -o site.js -t babelify -d",
+    "watch": "watchify -r ./_js/main.js:site -o site.js -t [ babelify --modules common ] -d",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

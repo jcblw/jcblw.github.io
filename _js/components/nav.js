@@ -1,12 +1,12 @@
 'use strict'
 
-const React = require('react/addons')
-const Icon = require('./icon')
-const Avatar = require('./avatar')
-const _ = require('../libs/utilities')
-const dispatcher = require('../dispatcher')
+import React, {Component} from 'react/addons'
+import Icon from './icon'
+import Avatar from './avatar'
+import {makeArray} from '../libs/utilities'
+import dispatcher from '../dispatcher'
 
-module.exports = class Nav extends React.Component {
+class Nav extends Component {
 
   constructor() {
     super()
@@ -16,7 +16,7 @@ module.exports = class Nav extends React.Component {
   }
 
   handleClick() {
-    const args = _.makeArray(arguments)
+    const args = makeArray(arguments)
     args.unshift('navigation:click')
     dispatcher.emit.apply(dispatcher, args)
     this.setState({
@@ -75,3 +75,5 @@ module.exports = class Nav extends React.Component {
     )
   }
 }
+
+export default Nav

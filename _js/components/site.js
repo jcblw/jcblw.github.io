@@ -1,10 +1,10 @@
 'use strict'
 
-const React = require('react')
-const Nav = require('./nav')
-const Card = require('./card')
+import React, {Component} from 'react'
+import Nav from './nav'
+import Card from './card'
 
-module.exports = class Site extends React.Component {
+class SiteView extends Component {
   constructor() {
     super()
   }
@@ -17,3 +17,5 @@ module.exports = class Site extends React.Component {
     )
   }
 }
+
+export default SiteView

@@ -1,3 +1,3 @@
 'use strict'
-const site = require( './site' )
-module.exports = site
+import site from './site'
+export default site

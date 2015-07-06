@@ -1,9 +1,9 @@
 'use strict'
 
-const React = require('react/addons')
-const Icon = require('./icon')
+import React, {Component} from 'react/addons'
+import Icon from './icon'
 
-module.exports = class CardView extends React.Component {
+class CardView extends Component {
 
   constructor() {
     super()
@@ -77,3 +77,5 @@ module.exports = class CardView extends React.Component {
     )
   }
 }
+
+export default CardView

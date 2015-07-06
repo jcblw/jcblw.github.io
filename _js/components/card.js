@@ -1,9 +1,9 @@
 'use strict'
 
-const React = require('react/addons')
-const CardView = require('./card-view')
+import React, {Component} from 'react/addons'
+import CardView from './card-view'
 
-module.exports = class Card extends React.Component {
+class Card extends Component {
 
   constructor() {
     super()
@@ -47,5 +47,6 @@ module.exports = class Card extends React.Component {
       </article>
     )
   }
-
 }
+
+export default Card

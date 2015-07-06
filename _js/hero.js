@@ -1,6 +1,6 @@
 'use strict'
 
-const _ = require('./libs/utilities')
+import {makeArray} from './libs/utilities'
 
 function loadImage( url, callback ) {
   const image = new Image()
@@ -26,8 +26,9 @@ function loadAndAppend(attr) {
   }
 }
 
-module.exports.loadAttribute = function (attr) {
+function loadAttribute(attr) {
   const heros = document.querySelectorAll(`[${attr}]`);
-  _.makeArray(heros)
-    .forEach(loadAndAppend(attr));
+  makeArray(heros).forEach(loadAndAppend(attr));
 }
+
+export {loadAttribute, loadAndAppend, loadImage}
