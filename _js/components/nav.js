@@ -1,6 +1,7 @@
 'use strict'
 
-import React, {Component} from 'react/addons'
+import React, {Component} from 'react'
+import createFragment from 'react-addons-create-fragment'
 import Icon from './icon'
 import Avatar from './avatar'
 import {makeArray} from '../libs/utilities'
@@ -66,7 +67,7 @@ class Nav extends Component {
       this.addNavItem(nodeList, this.props.pages[ page ], page)
     }
 
-    const nodes = React.addons.createFragment(nodeList)
+    const nodes = createFragment(nodeList)
 
     return (
       <nav className="nav">

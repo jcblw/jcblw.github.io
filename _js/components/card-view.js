@@ -1,6 +1,7 @@
 'use strict'
 
-import React, {Component} from 'react/addons'
+import React, {Component} from 'react'
+import createFragment from 'react-addons-create-fragment'
 import Icon from './icon'
 
 class CardView extends Component {
@@ -35,7 +36,7 @@ class CardView extends Component {
       description.content = (<div dangerouslySetInnerHTML={{__html: content.desc}} />)
     }
 
-    const nodes = React.addons.createFragment(description)
+    const nodes = createFragment(description)
 
     nodeList[content.title] = (
       <section data-hero={content.hero}>
@@ -67,7 +68,7 @@ class CardView extends Component {
     page.contents
       .forEach(this.addContentNode.bind(this, nodeList))
 
-    const nodes = React.addons.createFragment(nodeList)
+    const nodes = createFragment(nodeList)
 
     return (
       <section className={`card-content ${this.props.className}`}>

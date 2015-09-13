@@ -1,6 +1,7 @@
 'use strict'
 
-import React, {Component} from 'react/addons'
+import React, {Component} from 'react'
+import createFragment from 'react-addons-create-fragment'
 import CardView from './card-view'
 
 class Card extends Component {
@@ -39,7 +40,7 @@ class Card extends Component {
       index += 1
     }
 
-    const nodes = React.addons.createFragment(nodeList)
+    const nodes = createFragment(nodeList)
 
     return (
       <article className="card card-main round-borders">

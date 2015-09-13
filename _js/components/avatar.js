@@ -1,16 +1,11 @@
 'use strict'
 
-import React, {Component} from 'react'
+import React from 'react'
 
-class Avatar extends Component {
-  constructor() {
-    super()
-  }
-  render() {
-    return (
-      <img className={'avatar ' + this.props.className} src={this.props.src} />
-    )
-  }
+const Avatar = (props) => {
+  return (
+    <img className={'avatar ' + props.className} src={props.src} />
+  )
 }
 
 export default Avatar

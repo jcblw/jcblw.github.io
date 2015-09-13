@@ -1,21 +1,16 @@
 'use strict'
 
-import React, {Component} from 'react'
+import React from 'react'
 import Nav from './nav'
 import Card from './card'
 
-class SiteView extends Component {
-  constructor() {
-    super()
-  }
-  render() {
-    return (
-      <div className="content">
-        <Nav pages={this.props.pages} current={this.props.currentPage}></Nav>
-        <Card pages={this.props.pages} current={this.props.currentPage} index={this.props.currentIndex}></Card>
-      </div>
-    )
-  }
+const SiteView = (props) => {
+  return (
+    <div className="content">
+      <Nav pages={props.pages} current={props.currentPage}></Nav>
+      <Card pages={props.pages} current={props.currentPage} index={props.currentIndex}></Card>
+    </div>
+  )
 }
 
 export default SiteView

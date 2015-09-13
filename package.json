@@ -1,10 +1,10 @@
 {
   "name": "jcblw.github.io",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "My site hosted on github",
   "scripts": {
     "start": "jekyll serve --watch",
-    "scripts": "browserify -r ./_js/main.js:site -o site.js -t [ babelify --modules common ]",
+    "scripts": "browserify -r ./_js/main.js:site -o site.js -t [ babelify --modules common ] -d",
     "styles": "lessc _less/site.less >  site.css",
     "build": "npm run scripts && npm run styles",
     "watch": "watchify -r ./_js/main.js:site -o site.js -t [ babelify --modules common ] -d",
@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "marrow": "~0.1.0",
-    "react": "^0.13.3"
+    "react": "^0.14.0-rc1",
+    "react-addons-create-fragment": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1"
   }
 }

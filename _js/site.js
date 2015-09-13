@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react'
+import ReactDOM from 'react-dom'
 import marrow from 'marrow'
 import SiteView from './components/site'
 import dispatcher from './dispatcher'
@@ -26,7 +27,7 @@ const Site = marrow(
     },
 
     render: function() {
-      this.view = React.render(
+      this.view = ReactDOM.render(
         <SiteView
           pages={this.options.pages}
           currentPage={this.options.currentPage}

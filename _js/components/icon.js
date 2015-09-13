@@ -1,16 +1,11 @@
 'use strict'
 
-import React, {Component} from 'react'
+import React from 'react'
 
-class Icon extends Component {
-  constructor() {
-    super()
-  }
-  render() {
-    return (
-      <i className={`icon-${this.props.icon} ${this.props.className}`}></i>
-    )
-  }
+const Icon = (props) => {
+  return (
+    <i className={`icon-${props.icon} ${props.className}`}></i>
+  )
 }
 
 export default Icon
