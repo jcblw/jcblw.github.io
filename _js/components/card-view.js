@@ -4,6 +4,7 @@ import React, {Component} from 'react'
 import createFragment from 'react-addons-create-fragment'
 import Icon from './icon'
 import Hero from './hero'
+import Emoji from './emoji'
 
 class CardView extends Component {
 
@@ -34,7 +35,7 @@ class CardView extends Component {
     const description = {}
 
     if ( content.desc ) {
-      description.content = (<div dangerouslySetInnerHTML={{__html: content.desc}} />)
+      description.content = (<Emoji className='emojifiedText' content={content.desc} />)
     }
 
     const nodes = createFragment(description)
