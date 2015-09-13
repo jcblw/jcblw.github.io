@@ -484,25 +484,28 @@ you can use the generic selector below, but it's slower:
 }
 /* basic tags */
 body {
-  font-weight: 400;
-  font-family: "Neuton", sans-serif;
-  font-size: 1.2em;
+  font-weight: 300;
+  font-family: "Roboto", sans-serif;
+  font-size: .9em;
   line-height: 1.5em;
   color: #444444;
 }
 h1,
 h2,
 h3 {
+  font-weight: 500;
   color: #e38a38;
   display: block;
 }
 h4,
 h5,
 h6 {
+  font-weight: 500;
   color: #a6d8ce;
 }
 p {
   padding: 10px;
+  margin-bottom: 1.33em;
 }
 a {
   color: #a6d8ce;
