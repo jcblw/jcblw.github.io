@@ -19,6 +19,16 @@ projects:
 #   title: "Designs"
 #   icon: "power"
 #   contents:
+#     - title: 'Nodeschool Los Angeles'
+#       hero: 'http://nodeschool.io/los-angeles/images/logo.svg'
+#     - title: 'JS.LA Website'
+#       hero: 'take a screen shot'
+#     - title: 'Node Redis'
+#       hero: 'take a screen shot'
+#     - title: 'Drinks JS'
+#       hero:  '/images/drinks-js.png'
+#     - title: 'LAX icon'
+#       hero: '/images/lax-icon.png'
 groups:
   title: "Self Promotion"
   icon: "megaphone"
@@ -53,6 +63,6 @@ contact:
     - title: "Instagram"
       link: "http://instagram.com/jcblw"
       icon: "instagram"
-    - title: "ping@jacoblowe.me"
-      link: "mailto:ping@jacoblowe.me"
+    - title: "jacob@js.la"
+      link: "mailto:jacob@js.la"
       icon: "at"

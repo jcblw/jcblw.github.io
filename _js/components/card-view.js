@@ -3,6 +3,7 @@
 import React, {Component} from 'react'
 import createFragment from 'react-addons-create-fragment'
 import Icon from './icon'
+import Hero from './hero'
 
 class CardView extends Component {
 
@@ -38,16 +39,24 @@ class CardView extends Component {
 
     const nodes = createFragment(description)
 
-    nodeList[content.title] = (
-      <section data-hero={content.hero}>
-        <h4>
-          <a href={content.link} >
-            <Icon icon={content.icon}></Icon> {content.title}
-          </a>
-        </h4>
-        {nodes}
-      </section>
-    )
+    if (!content.hero) {
+      nodeList[content.title] = (
+        <section>
+          <h4>
+            <a href={content.link} >
+              <Icon icon={content.icon}></Icon> {content.title}
+            </a>
+          </h4>
+          {nodes}
+        </section>
+      )
+
+    } else {
+      nodeList[content.title] = (
+        <Hero src={content.hero}></Hero>
+      )
+    }
+
   }
 
   render() {

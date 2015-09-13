@@ -1,16 +1,38 @@
 'use strict'
 
-import React from 'react'
+import React, {Component} from 'react'
+import SiteStore from '../stores/SiteStore'
 import Nav from './nav'
 import Card from './card'
 
-const SiteView = (props) => {
-  return (
-    <div className="content">
-      <Nav pages={props.pages} current={props.currentPage}></Nav>
-      <Card pages={props.pages} current={props.currentPage} index={props.currentIndex}></Card>
-    </div>
-  )
+class SiteView extends Component {
+
+  constructor() {
+    super()
+    this.state = SiteStore.getAllPages()
+    this._onChange = this._onChange.bind(this)
+  }
+
+  componentDidMount() {
+    SiteStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount() {
+    SiteStore.removeChangeListener();
+  }
+
+  render() {
+    return (
+      <div className="content">
+        <Nav pages={this.state.pages} current={this.state.currentPage}></Nav>
+        <Card pages={this.state.pages} current={this.state.currentPage} index={this.state.currentIndex}></Card>
+      </div>
+    )
+  }
+
+  _onChange() {
+    this.setState(SiteStore.getAllPages());
+  }
 }
 
 export default SiteView

@@ -5,7 +5,7 @@ import createFragment from 'react-addons-create-fragment'
 import Icon from './icon'
 import Avatar from './avatar'
 import {makeArray} from '../libs/utilities'
-import dispatcher from '../dispatcher'
+import SiteActions from '../actions/SiteActions'
 
 class Nav extends Component {
 
@@ -18,8 +18,7 @@ class Nav extends Component {
 
   handleClick() {
     const args = makeArray(arguments)
-    args.unshift('navigation:click')
-    dispatcher.emit.apply(dispatcher, args)
+    SiteActions.navigate.apply(SiteActions, args)
     this.setState({
       pressed: null
     })
