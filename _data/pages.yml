@@ -4,7 +4,7 @@ about:
   contents:
     - hero: "/images/beach.jpg"
     - title: "Just a snippet"
-      desc: "I make and break awesome things. I am developer based out of Santa Monica California. The web is my passion and I continue to push the bar with web technologies. I am currently a co-organizer of <a href='http://js.la'>JS.LA</a>. I am a huge avocate for open source software. Also sloths are awesome :raised_hands:"
+      desc: "I make and break awesome things. I am developer based out of Santa Monica California. The web is my passion and I continue to push the bar with web technologies. I am currently a co-organizer of <a href='http://js.la'>JS.LA</a>. I am a huge advocate for open source software. Also sloths are awesome :raised_hands:"
       icon: "address-book"
       link: "#"
     - title: "I am a"
