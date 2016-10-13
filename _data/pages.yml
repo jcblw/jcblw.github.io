@@ -11,9 +11,6 @@ about:
       desc: "<ul><li>Javascript Ninja</li><li>CSS Tamer</li><li>HTML Carpenter</li><li>Regular Expressions Wrangler</li><li>What do any of those mean?</li></ul>"
       icon: "profile"
       link: "#"
-    - title: "I currently work @ RadPad"
-      icon: "location"
-      link: "https://onradpad.com"
 projects:
 # design:
 #   title: "Designs"
