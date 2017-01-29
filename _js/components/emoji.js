@@ -11,7 +11,7 @@ emojify.setConfig({
 const Emoji = (props) => {
   const emojifiedText = emojify.replace(props.content)
   return (
-    <div className="{props.className}" dangerouslySetInnerHTML={{__html: emojifiedText}}></div>
+    <div className='{props.className}' dangerouslySetInnerHTML={{__html: emojifiedText}} />
   )
 }
 

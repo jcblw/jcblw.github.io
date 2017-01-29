@@ -6,36 +6,34 @@ import CardView from './card-view'
 
 class Card extends Component {
 
-  constructor() {
+  constructor () {
     super()
     this.state = {}
   }
 
-  getCardViewPosition(index, current) {
-    if ( index < current ) {
+  getCardViewPosition (index, current) {
+    if (index < current) {
       return 'card-before'
     }
-    if ( index > current ) {
+    if (index > current) {
       return 'card-after'
     }
     return 'card-active'
   }
 
-  addCardView(nodeList, page, id) {
-
+  addCardView (nodeList, page, id) {
     const isCurrent = (id === this.props.current)
     const position = this.getCardViewPosition(page.index, this.props.index)
 
-    nodeList[id] = (<CardView key={id} page={page} current={isCurrent} className={position}></CardView>)
+    nodeList[id] = (<CardView key={id} page={page} current={isCurrent} className={position} />)
   }
 
-  render() {
-
+  render () {
     const nodeList = {}
     let index = 0
 
     for (let page in this.props.pages) {
-      this.props.pages[page].index = index;
+      this.props.pages[page].index = index
       this.addCardView(nodeList, this.props.pages[page], page)
       index += 1
     }
@@ -43,7 +41,7 @@ class Card extends Component {
     const nodes = createFragment(nodeList)
 
     return (
-      <article className="card card-main round-borders">
+      <article className='card card-main round-borders'>
         {nodes}
       </article>
     )

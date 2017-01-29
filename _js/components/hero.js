@@ -5,12 +5,12 @@ import {loadImage} from '../libs/utilities'
 
 class Hero extends Component {
 
-  constructor() {
+  constructor () {
     super()
-    this.state = {};
+    this.state = {}
   }
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.state.backgroundImage) {
       return
     }
@@ -25,9 +25,9 @@ class Hero extends Component {
     })
   }
 
-  render() {
+  render () {
     return (
-      <section className="hero-image" style={this.state}></section>
+      <section className='hero-image' style={this.state} />
     )
   }
 }

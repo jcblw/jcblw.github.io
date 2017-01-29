@@ -6,11 +6,10 @@ import SiteView from './components/site'
 import SiteStore from './stores/SiteStore'
 
 const start = (pages, container) => {
-
   SiteStore.setPages(pages)
 
   ReactDOM.render(
-    <SiteView/>,
+    <SiteView />,
     container
   )
 }

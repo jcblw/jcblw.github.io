@@ -4,38 +4,38 @@ import SiteDispatcher from '../dispatchers/SiteDispatcher'
 import SiteConstants from '../constants/SiteConstants'
 let _pages = {}
 // there should only be one of these
-let changeListener = function(){}
+let changeListener = function () { }
 
-function navigate(current) {
+function navigate (current) {
   _pages.currentPage = current.page
   _pages.currentIndex = current.index
   changeListener() // fire off change
 }
 
 const SiteStore = {
-  getAllPages: function() {
+  getAllPages () {
     return _pages
   },
 
-  setPages: function(pages) {
+  setPages (pages) {
     _pages = pages
   },
 
-  addChangeListener: function(fn) {
-    changeListener = fn;
+  addChangeListener (fn) {
+    changeListener = fn
   },
 
-  removeChangeListener: function() {
-    changeListener = function() {}
+  removeChangeListener () {
+    changeListener = function () {}
   }
 }
 
-SiteDispatcher.register(function(action) {
+SiteDispatcher.register((action) => {
   const {actionType} = action
 
   if (actionType === SiteConstants.SITE_NAVIGATE) {
-    navigate(action.current);
+    navigate(action.current)
   }
-});
+})
 
-export default SiteStore;
+export default SiteStore

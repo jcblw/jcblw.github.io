@@ -4,7 +4,7 @@ import SiteDispatcher from '../dispatchers/SiteDispatcher'
 import SiteConstants from '../constants/SiteConstants'
 
 const SiteActions = {
-  navigate(current) {
+  navigate (current) {
     SiteDispatcher.dispatch({
       actionType: SiteConstants.SITE_NAVIGATE,
       current: current
@@ -12,4 +12,4 @@ const SiteActions = {
   }
 }
 
-export default SiteActions;
+export default SiteActions

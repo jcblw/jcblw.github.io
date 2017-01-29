@@ -7,31 +7,31 @@ import Card from './card'
 
 class SiteView extends Component {
 
-  constructor() {
+  constructor () {
     super()
     this.state = SiteStore.getAllPages()
     this._onChange = this._onChange.bind(this)
   }
 
-  componentDidMount() {
-    SiteStore.addChangeListener(this._onChange);
+  componentDidMount () {
+    SiteStore.addChangeListener(this._onChange)
   }
 
-  componentWillUnmount() {
-    SiteStore.removeChangeListener();
+  componentWillUnmount () {
+    SiteStore.removeChangeListener()
   }
 
-  render() {
+  render () {
     return (
-      <div className="content">
-        <Nav pages={this.state.pages} current={this.state.currentPage}></Nav>
-        <Card pages={this.state.pages} current={this.state.currentPage} index={this.state.currentIndex}></Card>
+      <div className='content'>
+        <Nav pages={this.state.pages} current={this.state.currentPage} />
+        <Card pages={this.state.pages} current={this.state.currentPage} index={this.state.currentIndex} />
       </div>
     )
   }
 
-  _onChange() {
-    this.setState(SiteStore.getAllPages());
+  _onChange () {
+    this.setState(SiteStore.getAllPages())
   }
 }
 

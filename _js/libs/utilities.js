@@ -1,12 +1,12 @@
 'use strict'
 
-function makeArray(arr) {
+function makeArray (arr) {
   return Array.prototype.slice.call(arr, 0)
 }
 
-function loadImage( url, callback ) {
-  const image = new Image()
-  function onLoaded() {
+function loadImage (url, callback) {
+  const image = new window.Image()
+  function onLoaded () {
     callback(null, image)
   }
   image.onload = onLoaded

@@ -8,12 +8,12 @@ import Emoji from './emoji'
 
 class CardView extends Component {
 
-  constructor() {
+  constructor () {
     super()
     this.state = {}
   }
 
-  mapRepoData(repo) {
+  mapRepoData (repo) {
     return {
       title: repo.name,
       desc: `${repo.description}<br /><small><strong>${repo.stargazers_count}</strong> stars</small>`,
@@ -23,18 +23,18 @@ class CardView extends Component {
     }
   }
 
-  filterRepos(repo) {
+  filterRepos (repo) {
     return (!repo.fork && repo.stargazers_count > 1)
   }
 
-  sortByStars(prev, next) {
+  sortByStars (prev, next) {
     return next.stars - prev.stars
   }
 
-  addContentNode(nodeList, content) {
+  addContentNode (nodeList, content) {
     const description = {}
 
-    if ( content.desc ) {
+    if (content.desc) {
       description.content = (<Emoji className='emojifiedText' content={content.desc} />)
     }
 
@@ -45,22 +45,20 @@ class CardView extends Component {
         <section>
           <h4>
             <a href={content.link} >
-              <Icon icon={content.icon}></Icon> {content.title}
+              <Icon icon={content.icon} /> {content.title}
             </a>
           </h4>
           {nodes}
         </section>
       )
-
     } else {
       nodeList[content.title] = (
-        <Hero src={content.hero}></Hero>
+        <Hero src={content.hero} />
       )
     }
-
   }
 
-  render() {
+  render () {
     const page = this.props.page
     const nodeList = {}
 
