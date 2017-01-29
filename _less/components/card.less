@@ -22,20 +22,21 @@
 	background: @white;
 	overflow-y: scroll;
 	overflow-x: hidden;
-    .m-transition(all .7s cubic-bezier(0.57,-0.07, 0.51, 1.1) .08s);
+  .m-transition(all .3s cubic-bezier(0.46, -0.01, 0.29, 1.49) .3s);
+  .m-transform-origin(0 0);
 }
 
-.card > section.card-after {
-  .m-transform(translate(100%, 0));
+.card > section.card-after,
+.card > section.card-before {
+  .m-transform(scale(.9) translate(0, 3em));
+  opacity: 0;
+  .m-transition(all .3s cubic-bezier(0.46, -0.01, 0.29, 1.49) 0s);
 }
 
 .card > section.card-active {
 	z-index: 100;
-  .m-transform(translate(0, 0));
-}
-
-.card > section.card-before {
-  .m-transform(translate(-100%, 0));
+  opacity: 1;
+  .m-transform(scale(1) translate(0, 0));
 }
 
 .card > section > section {

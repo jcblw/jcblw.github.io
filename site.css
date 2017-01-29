@@ -562,33 +562,39 @@ small {
   background: #faf7f2;
   overflow-y: scroll;
   overflow-x: hidden;
-  -webkit-transition: all 0.7s cubic-bezier(0.57, -0.07, 0.51, 1.1) 0.08s;
-  -moz-transition: all 0.7s cubic-bezier(0.57, -0.07, 0.51, 1.1) 0.08s;
-  -ms-transition: all 0.7s cubic-bezier(0.57, -0.07, 0.51, 1.1) 0.08s;
-  -o-transition: all 0.7s cubic-bezier(0.57, -0.07, 0.51, 1.1) 0.08s;
-  transition: all 0.7s cubic-bezier(0.57, -0.07, 0.51, 1.1) 0.08s;
+  -webkit-transition: all 0.3s cubic-bezier(0.46, -0.01, 0.29, 1.49) 0.3s;
+  -moz-transition: all 0.3s cubic-bezier(0.46, -0.01, 0.29, 1.49) 0.3s;
+  -ms-transition: all 0.3s cubic-bezier(0.46, -0.01, 0.29, 1.49) 0.3s;
+  -o-transition: all 0.3s cubic-bezier(0.46, -0.01, 0.29, 1.49) 0.3s;
+  transition: all 0.3s cubic-bezier(0.46, -0.01, 0.29, 1.49) 0.3s;
+  -webkit-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  transform-origin: 0 0;
 }
-.card > section.card-after {
-  -webkit-transform: translate(100%, 0);
-  -moz-transform: translate(100%, 0);
-  -ms-transform: translate(100%, 0);
-  -o-transform: translate(100%, 0);
-  transform: translate(100%, 0);
+.card > section.card-after,
+.card > section.card-before {
+  -webkit-transform: scale(0.9) translate(0, 3em);
+  -moz-transform: scale(0.9) translate(0, 3em);
+  -ms-transform: scale(0.9) translate(0, 3em);
+  -o-transform: scale(0.9) translate(0, 3em);
+  transform: scale(0.9) translate(0, 3em);
+  opacity: 0;
+  -webkit-transition: all 0.3s cubic-bezier(0.46, -0.01, 0.29, 1.49) 0s;
+  -moz-transition: all 0.3s cubic-bezier(0.46, -0.01, 0.29, 1.49) 0s;
+  -ms-transition: all 0.3s cubic-bezier(0.46, -0.01, 0.29, 1.49) 0s;
+  -o-transition: all 0.3s cubic-bezier(0.46, -0.01, 0.29, 1.49) 0s;
+  transition: all 0.3s cubic-bezier(0.46, -0.01, 0.29, 1.49) 0s;
 }
 .card > section.card-active {
   z-index: 100;
-  -webkit-transform: translate(0, 0);
-  -moz-transform: translate(0, 0);
-  -ms-transform: translate(0, 0);
-  -o-transform: translate(0, 0);
-  transform: translate(0, 0);
-}
-.card > section.card-before {
-  -webkit-transform: translate(-100%, 0);
-  -moz-transform: translate(-100%, 0);
-  -ms-transform: translate(-100%, 0);
-  -o-transform: translate(-100%, 0);
-  transform: translate(-100%, 0);
+  opacity: 1;
+  -webkit-transform: scale(1) translate(0, 0);
+  -moz-transform: scale(1) translate(0, 0);
+  -ms-transform: scale(1) translate(0, 0);
+  -o-transform: scale(1) translate(0, 0);
+  transform: scale(1) translate(0, 0);
 }
 .card > section > section {
   padding-bottom: 16px;
@@ -711,6 +717,11 @@ body,
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+}
+@media (min-width: 600px) {
+  .content > article {
+    margin: -20px 0;
+  }
 }
 @media screen and (min-width: 600px) {
   .content {
