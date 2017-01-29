@@ -33,6 +33,7 @@
   "dependencies": {
     "emojify.js": "^1.1.0",
     "flux": "^2.1.1",
+    "less": "^1.7.5",
     "marrow": "~0.1.0",
     "react": "^0.14.0-rc1",
     "react-addons-create-fragment": "^0.14.0-rc1",
